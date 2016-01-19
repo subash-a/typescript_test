@@ -1,6 +1,7 @@
 import * as React from "react";
 import {helloworld} from "./helloworld";
 import {curry} from "./lang";
+import {Uint64} from "./custom_types";
 
 // **************************
 // Define a generic component
@@ -22,6 +23,7 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
 	private send(): void {
 		let x = new helloworld.HelloRequest();
 		x.setName(this.state.greeting);
+		x.setAge(new Uint64(20));
 		let r = new Request("/SayHello", { method: "POST", body: x.serializeBinary(), mode: "cors" });
 		fetch(r).then((response) => response.arrayBuffer()).then((response) => {
 			var arr = new Uint8Array(response);

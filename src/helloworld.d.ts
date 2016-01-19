@@ -1,3 +1,5 @@
+///<reference path="./custom_types.d.ts" />
+
 export namespace helloworld {
 	export class HelloRequest {
 		setName(s: string): void;
