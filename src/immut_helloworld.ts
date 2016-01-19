@@ -10,12 +10,12 @@ export class ImmutableHelloRequest {
 
 	static fromHelloRequest(u: helloworld.HelloRequest): ImmutableHelloRequest {
 		let ihr = new ImmutableHelloRequest();
-		ihr.underlying = u;
+		ihr.underlying = u.cloneMessage();
 		return ihr;
 	}
 
 	SetName(name: string): ImmutableHelloRequest {
-		let instance = ImmutableHelloRequest.fromHelloRequest(this.underlying);
+		let instance = ImmutableHelloRequest.fromHelloRequest(this.underlying.cloneMessage());
 		instance.underlying.setName(name);
 		return instance;
 	}
@@ -25,7 +25,7 @@ export class ImmutableHelloRequest {
 	}
 
 	SetAge(age: Uint64): ImmutableHelloRequest {
-		let instance = ImmutableHelloRequest.fromHelloRequest(this.underlying);
+		let instance = ImmutableHelloRequest.fromHelloRequest(this.underlying.cloneMessage());
 		instance.underlying.setAge(age.toNumber());
 		return instance;
 	}
@@ -48,12 +48,12 @@ export class ImmutableHelloReply {
 
 	static fromHelloReply(u: helloworld.HelloReply): ImmutableHelloReply {
 		let ihr = new ImmutableHelloReply();
-		ihr.underlying = u;
+		ihr.underlying = u.cloneMessage();
 		return ihr;
 	}
 
 	SetMessage(message: string): ImmutableHelloReply {
-		let instance = ImmutableHelloReply.fromHelloReply(this.underlying);
+		let instance = ImmutableHelloReply.fromHelloReply(this.underlying.cloneMessage());
 		instance.underlying.setMessage(message);
 		return instance;
 	}

@@ -7,12 +7,14 @@ export namespace helloworld {
 		setAge(n: number): void;
 		getAge(): number;
 		serializeBinary(): ArrayBuffer;
+		cloneMessage(): HelloRequest;
 		static deserializeBinary(arr: Uint8Array): HelloRequest;
 	}
 	export class HelloReply {
 		setMessage(s: string): void;
 		getMessage(): string;
 		serializeBinary(): ArrayBuffer;
+		cloneMessage(): HelloReply;
 		static deserializeBinary(arr: Uint8Array): HelloReply;
 	}
 }
