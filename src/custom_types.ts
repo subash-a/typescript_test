@@ -78,11 +78,3 @@ export class Uint64 {
 		return this.val;
 	}
 }
-
-export class EnumType {
-	[key: string]: number;
-}
-
-export class MessageType {
-
-}
