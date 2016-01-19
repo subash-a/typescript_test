@@ -1,7 +1,8 @@
 import * as React from "react";
-import {helloworld} from "./helloworld";
+// import {helloworld} from "./helloworld";
 import {curry} from "./lang";
 import {Uint64} from "./custom_types";
+import {ImmutableHelloReply, ImmutableHelloRequest} from "./immut_helloworld";
 
 // **************************
 // Define a generic component
@@ -21,14 +22,14 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
 	}
 
 	private send(): void {
-		let x = new helloworld.HelloRequest();
-		x.setName(this.state.greeting);
-		x.setAge(new Uint64(20));
-		let r = new Request("/SayHello", { method: "POST", body: x.serializeBinary(), mode: "cors" });
+		let x = new ImmutableHelloRequest();
+		x = x.SetName(this.state.greeting);
+		x = x.SetAge(new Uint64(20));
+		let r = new Request("/SayHello", { method: "POST", body: x.Serialize(), mode: "cors" });
 		fetch(r).then((response) => response.arrayBuffer()).then((response) => {
 			var arr = new Uint8Array(response);
-			var y = helloworld.HelloReply.deserializeBinary(arr);
-			this.setState({responses: this.state.responses + "\n" + y.getMessage()});
+			var y = ImmutableHelloReply.Deserialize(arr);
+			this.setState({responses: this.state.responses + "\n" + y.Message()});
 		}, () => {
 			console.log("we failed");
 		});
