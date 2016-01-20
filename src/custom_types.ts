@@ -1,6 +1,6 @@
-const MAX_32_NUM = Math.pow(2,30);
+const MAX_32_NUM = Math.pow(2,31);
 const MAX_64_NUM = Math.pow(2,62);
-const MAX_U32_NUM = Math.pow(2,31);
+const MAX_U32_NUM = Math.pow(2,32);
 const MAX_U64_NUM = Math.pow(2,63);
 
 export class Int32 {

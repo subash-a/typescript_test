@@ -1,21 +1,21 @@
 import {Uint64} from "./custom_types";
 import {helloworld} from "./helloworld";
 
-export class ImmutableHelloRequest {
+export class HelloRequest {
 	private underlying: helloworld.HelloRequest;
 
 	constructor() {
 		this.underlying = new helloworld.HelloRequest();
 	}
 
-	static fromHelloRequest(u: helloworld.HelloRequest): ImmutableHelloRequest {
-		let ihr = new ImmutableHelloRequest();
+	static fromHelloRequest(u: helloworld.HelloRequest): HelloRequest {
+		let ihr = new HelloRequest();
 		ihr.underlying = u.cloneMessage();
 		return ihr;
 	}
 
-	SetName(name: string): ImmutableHelloRequest {
-		let instance = ImmutableHelloRequest.fromHelloRequest(this.underlying.cloneMessage());
+	SetName(name: string): HelloRequest {
+		let instance = HelloRequest.fromHelloRequest(this.underlying.cloneMessage());
 		instance.underlying.setName(name);
 		return instance;
 	}
@@ -24,8 +24,8 @@ export class ImmutableHelloRequest {
 		return this.underlying.getName();
 	}
 
-	SetAge(age: Uint64): ImmutableHelloRequest {
-		let instance = ImmutableHelloRequest.fromHelloRequest(this.underlying.cloneMessage());
+	SetAge(age: Uint64): HelloRequest {
+		let instance = HelloRequest.fromHelloRequest(this.underlying.cloneMessage());
 		instance.underlying.setAge(age.toNumber());
 		return instance;
 	}
@@ -38,27 +38,27 @@ export class ImmutableHelloRequest {
 		return this.underlying.serializeBinary();
 	}
 
-	static Deserialize(buffer: Uint8Array): ImmutableHelloRequest {
-		return ImmutableHelloRequest.fromHelloRequest(helloworld.HelloRequest.deserializeBinary(buffer));
+	static Deserialize(buffer: Uint8Array): HelloRequest {
+		return HelloRequest.fromHelloRequest(helloworld.HelloRequest.deserializeBinary(buffer));
 	}
 
 }
 
-export class ImmutableHelloReply {
+export class HelloReply {
 	private underlying: helloworld.HelloReply;
 
 	constructor() {
 		this.underlying = new helloworld.HelloReply();
 	}
 
-	static fromHelloReply(u: helloworld.HelloReply): ImmutableHelloReply {
-		let ihr = new ImmutableHelloReply();
+	static fromHelloReply(u: helloworld.HelloReply): HelloReply {
+		let ihr = new HelloReply();
 		ihr.underlying = u.cloneMessage();
 		return ihr;
 	}
 
-	SetMessage(message: string): ImmutableHelloReply {
-		let instance = ImmutableHelloReply.fromHelloReply(this.underlying.cloneMessage());
+	SetMessage(message: string): HelloReply {
+		let instance = HelloReply.fromHelloReply(this.underlying.cloneMessage());
 		instance.underlying.setMessage(message);
 		return instance;
 	}
@@ -71,7 +71,7 @@ export class ImmutableHelloReply {
 		return this.underlying.serializeBinary();
 	}
 
-	static Deserialize(buffer: Uint8Array): ImmutableHelloReply {
-		return ImmutableHelloReply.fromHelloReply(helloworld.HelloReply.deserializeBinary(buffer));
+	static Deserialize(buffer: Uint8Array): HelloReply {
+		return HelloReply.fromHelloReply(helloworld.HelloReply.deserializeBinary(buffer));
 	}
 }

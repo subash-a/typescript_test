@@ -1,9 +1,8 @@
 import * as React from "react";
-// import {helloworld} from "./helloworld";
 import {curry} from "./lang";
 import {Uint64} from "./custom_types";
-import {ImmutableHelloReply, ImmutableHelloRequest} from "./immut_helloworld";
-
+import {HelloReply, HelloRequest} from "./immut_helloworld";
+import {Backend} from "./api_endpoint";
 // **************************
 // Define a generic component
 interface ComponentAProps<T> {
@@ -22,13 +21,12 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
 	}
 
 	private send(): void {
-		let x = new ImmutableHelloRequest();
+		let backend = new Backend("http://localhost:8080");
+		let x = new HelloRequest();
 		x = x.SetName(this.state.greeting);
 		x = x.SetAge(new Uint64(20));
-		let r = new Request("/SayHello", { method: "POST", body: x.Serialize(), mode: "cors" });
-		fetch(r).then((response) => response.arrayBuffer()).then((response) => {
-			var arr = new Uint8Array(response);
-			var y = ImmutableHelloReply.Deserialize(arr);
+
+		backend.SayHello(x).then((y) => {
 			this.setState({responses: this.state.responses + "\n" + y.Message()});
 		}, () => {
 			console.log("we failed");
