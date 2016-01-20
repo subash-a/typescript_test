@@ -10,7 +10,7 @@ module.exports = function(config) {
 			loadFiles: [
 				'dist/**/*.spec.js'
 			],
-			serveFiles: ['src/**/*.ts', 'dist/**/*.js', 'dist/**/*.map', 'goog/**/*.js', 'protobuf/**/*.js']
+			serveFiles: [ 'goog/**/*.js', 'protobuf/**/*.js', 'src/**/*.ts', 'dist/**/*.js', 'dist/**/*.map']
 		},
 		colors: true,
 		reporters: ['dots'],
