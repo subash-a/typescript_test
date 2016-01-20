@@ -20,7 +20,7 @@ export class HelloRequest {
 		return instance;
 	}
 
-	get Name() {
+	get Name(): string {
 		return this.underlying.getName();
 	}
 
@@ -30,7 +30,7 @@ export class HelloRequest {
 		return instance;
 	}
 
-	get Age() {
+	get Age(): Uint64 {
 		return new Uint64(this.underlying.getAge());
 	}
 
@@ -63,7 +63,7 @@ export class HelloReply {
 		return instance;
 	}
 
-	get Message() {
+	get Message(): string {
 		return this.underlying.getMessage();
 	}
 

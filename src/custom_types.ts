@@ -22,7 +22,7 @@ export class Int32 {
 	}
 }
 
-export function int32(n: number): int32 {
+export function int32(n: number): Int32 {
 	return new Int32(n);
 }
 

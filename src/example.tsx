@@ -27,7 +27,7 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
 		x = x.SetAge(uint64(20));
 
 		backend.SayHello(x).then((y) => {
-			this.setState({responses: this.state.responses + "\n" + y.Message()});
+			this.setState({responses: this.state.responses + "\n" + y.Message});
 		}, () => {
 			console.log("we failed");
 		});
