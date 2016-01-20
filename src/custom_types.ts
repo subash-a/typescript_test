@@ -22,6 +22,10 @@ export class Int32 {
 	}
 }
 
+export function int32(n: number): int32 {
+	return new Int32(n);
+}
+
 export class Uint32 {
 	private val: number;
 
@@ -39,6 +43,10 @@ export class Uint32 {
 	toNumber(): number {
 		return this.val;
 	}
+}
+
+export function uint32(n: number): Uint32 {
+	return new Uint32(n);
 }
 
 export class Int64 {
@@ -60,6 +68,10 @@ export class Int64 {
 	}
 }
 
+export function int64(n: number): Int64 {
+	return new Int64(n);
+}
+
 export class Uint64 {
 	private val: number;
 
@@ -77,4 +89,8 @@ export class Uint64 {
 	toNumber(): number {
 		return this.val;
 	}
+}
+
+export function uint64(n: number): Uint64 {
+	return new Uint64(n);
 }

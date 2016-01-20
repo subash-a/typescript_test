@@ -1,6 +1,6 @@
 import * as React from "react";
 import {curry} from "./lang";
-import {Uint64} from "./custom_types";
+import {uint64} from "./custom_types";
 import {HelloReply, HelloRequest} from "./immut_helloworld";
 import {Backend} from "./api_endpoint";
 // **************************
@@ -24,7 +24,7 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
 		let backend = new Backend("http://localhost:8080");
 		let x = new HelloRequest();
 		x = x.SetName(this.state.greeting);
-		x = x.SetAge(new Uint64(20));
+		x = x.SetAge(uint64(20));
 
 		backend.SayHello(x).then((y) => {
 			this.setState({responses: this.state.responses + "\n" + y.Message()});
