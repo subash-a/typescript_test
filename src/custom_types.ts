@@ -1,7 +1,7 @@
 const MAX_32_NUM = Math.pow(2,31);
-const MAX_64_NUM = Math.pow(2,62);
+const MAX_64_NUM = Math.pow(2,63);
 const MAX_U32_NUM = Math.pow(2,32);
-const MAX_U64_NUM = Math.pow(2,63);
+const MAX_U64_NUM = Math.pow(2,64);
 
 export class Int32 {
 	private val: number;
@@ -15,6 +15,11 @@ export class Int32 {
 		} else {
 			this.val = n;
 		}
+	}
+
+	static Parse(s: string) {
+		let num = parseInt(s, 10);
+		return new Int32(num);
 	}
 
 	toNumber(): number {
@@ -40,6 +45,11 @@ export class Uint32 {
 		}
 	}
 
+	static Parse(s: string) {
+		let num = parseInt(s, 10);
+		return new Uint32(num);
+	}
+
 	toNumber(): number {
 		return this.val;
 	}
@@ -63,6 +73,11 @@ export class Int64 {
 		}
 	}
 
+	static Parse(s: string) {
+		let num = parseInt(s, 10);
+		return new Int64(num);
+	}
+
 	toNumber(): number {
 		return this.val;
 	}
@@ -84,6 +99,11 @@ export class Uint64 {
 		} else {
 			this.val = n;
 		}
+	}
+
+	static Parse(s: string) {
+		let num = parseInt(s, 10);
+		return new Uint64(num);
 	}
 
 	toNumber(): number {
