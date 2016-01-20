@@ -37,6 +37,11 @@ export class ImmutableHelloRequest {
 	Serialize(): ArrayBuffer {
 		return this.underlying.serializeBinary();
 	}
+
+	static Deserialize(buffer: Uint8Array): ImmutableHelloRequest {
+		return ImmutableHelloRequest.fromHelloRequest(helloworld.HelloRequest.deserializeBinary(buffer));
+	}
+
 }
 
 export class ImmutableHelloReply {
@@ -60,6 +65,10 @@ export class ImmutableHelloReply {
 
 	Message(): string {
 		return this.underlying.getMessage();
+	}
+
+	Serialize(): ArrayBuffer {
+		return this.underlying.serializeBinary();
 	}
 
 	static Deserialize(buffer: Uint8Array): ImmutableHelloReply {

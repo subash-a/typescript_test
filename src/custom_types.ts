@@ -10,8 +10,8 @@ export class Int32 {
 		if(n === null || n === undefined) {
 			throw new Error("Int32 cannot be null or undefined");
 		}
-		if(Math.abs(n) > MAX_32_NUM) {
-			throw new Error("integer overflow (32bit)");
+		if(n >= MAX_32_NUM || n < (-MAX_32_NUM)) {
+			throw new Error("integer out of range (32bit)");
 		} else {
 			this.val = n;
 		}
@@ -29,7 +29,7 @@ export class Uint32 {
 		if(n === null || n === undefined) {
 			throw new Error("Uint32 cannot be null or undefined");
 		}
-		if(Math.abs(n) > MAX_U32_NUM) {
+		if(Math.abs(n) >= MAX_U32_NUM) {
 			throw new Error("unsigned integer overflow (32bit)");
 		} else {
 			this.val = n;
@@ -48,8 +48,8 @@ export class Int64 {
 		if(n === null || n === undefined) {
 			throw new Error("Int64 cannot be null or undefined");
 		}
-		if(Math.abs(n) > MAX_64_NUM) {
-			throw new Error("integer overflow (64bit)");
+		if(n >= MAX_64_NUM || n < (-MAX_64_NUM)) {
+			throw new Error("integer out of range (64bit)");
 		} else {
 			this.val = n;
 		}
@@ -67,7 +67,7 @@ export class Uint64 {
 		if(n === null || n === undefined) {
 			throw new Error("Uint64 cannot be null or undefined");
 		}
-		if(Math.abs(n) > MAX_64_NUM) {
+		if(Math.abs(n) >= MAX_U64_NUM) {
 			throw new Error("unsigned integer overflow (64bit)");
 		} else {
 			this.val = n;
