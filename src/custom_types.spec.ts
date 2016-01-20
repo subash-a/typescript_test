@@ -15,10 +15,10 @@ describe("Custom Types", () => {
 			expect(() => new Int32(-Math.pow(2,33))).toThrow();
 		});
 		it("should not throw error when a +ve number lesser than 32bits is passed", () => {
-			expect(() => new Int32(20)).toThrow();
+			expect(() => new Int32(20)).not.toThrow();
 		});
 		it("should not throw error when a -ve number lesser than 32bits is passed", () => {
-			expect(() => new Int32(-20)).toThrow();
+			expect(() => new Int32(-20)).not.toThrow();
 		});
 	});
 
@@ -36,10 +36,10 @@ describe("Custom Types", () => {
 			expect(() => new Int64(-Math.pow(2,65))).toThrow();
 		});
 		it("should not throw error when a +ve number lesser than 64bits is passed", () => {
-			expect(() => new Int64(Math.pow(2,50))).toThrow();
+			expect(() => new Int64(Math.pow(2,50))).not.toThrow();
 		});
 		it("should not throw error when a -ve number lesser than 64bits is passed", () => {
-			expect(() => new Int64(-Math.pow(2,50))).toThrow();
+			expect(() => new Int64(-Math.pow(2,50))).not.toThrow();
 		});
 
 	});
@@ -55,7 +55,7 @@ describe("Custom Types", () => {
 			expect(() => new Int32(Math.pow(2,33))).toThrow();
 		});
 		it("should not throw error when a number lesser than 32bits is passed", () => {
-			expect(() => new Int32(20)).toThrow();
+			expect(() => new Int32(20)).not.toThrow();
 		});
 	});
 	describe("Uint64", () => {
@@ -72,7 +72,7 @@ describe("Custom Types", () => {
 		});
 
 		it("should not throw error when a number lesser than 64bits is passed", () => {
-			expect(() => new Int64(Math.pow(2,50))).toThrow();
+			expect(() => new Int64(Math.pow(2,50))).not.toThrow();
 		});
 	});
 });
