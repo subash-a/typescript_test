@@ -51,8 +51,8 @@ message HelloReply {
 // Message to test one-of response
 message HelloRequestNew {
 	string name = 1;
-	oneof phone {
+	oneof contact {
 		int64 mobile = 2;
-		int64 home = 3;
+		string email = 3;
 	}
 }

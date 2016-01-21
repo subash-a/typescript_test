@@ -390,17 +390,17 @@ proto.helloworld.HelloRequestNew.oneofGroups_ = [[2,3]];
 /**
  * @enum {number}
  */
-proto.helloworld.HelloRequestNew.PhoneCase = {
-  PHONE_NOT_SET: 0,
+proto.helloworld.HelloRequestNew.ContactCase = {
+  CONTACT_NOT_SET: 0,
   MOBILE: 2,
-  HOME: 3
+  EMAIL: 3
 };
 
 /**
- * @return {proto.helloworld.HelloRequestNew.PhoneCase}
+ * @return {proto.helloworld.HelloRequestNew.ContactCase}
  */
-proto.helloworld.HelloRequestNew.prototype.getPhoneCase = function() {
-  return /** @type {proto.helloworld.HelloRequestNew.PhoneCase} */(jspb.Message.computeOneofCase(this, proto.helloworld.HelloRequestNew.oneofGroups_[0]));
+proto.helloworld.HelloRequestNew.prototype.getContactCase = function() {
+  return /** @type {proto.helloworld.HelloRequestNew.ContactCase} */(jspb.Message.computeOneofCase(this, proto.helloworld.HelloRequestNew.oneofGroups_[0]));
 };
 
 
@@ -433,7 +433,7 @@ proto.helloworld.HelloRequestNew.toObject = function(includeInstance, msg) {
   var f, obj = {
     name: msg.getName(),
     mobile: jspb.Message.getField(msg, 2),
-    home: jspb.Message.getField(msg, 3)
+    email: jspb.Message.getField(msg, 3)
   };
 
   if (includeInstance) {
@@ -479,8 +479,8 @@ proto.helloworld.HelloRequestNew.deserializeBinaryFromReader = function(msg, rea
       msg.setMobile(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setHome(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setEmail(value);
       break;
     default:
       reader.skipField();
@@ -534,9 +534,9 @@ proto.helloworld.HelloRequestNew.prototype.serializeBinaryToWriter = function (w
       f
     );
   }
-  f = this.getHome();
+  f = this.getEmail();
   if (f != null) {
-    writer.writeInt64(
+    writer.writeString(
       3,
       f
     );
@@ -589,21 +589,21 @@ proto.helloworld.HelloRequestNew.prototype.clearMobile = function() {
 
 
 /**
- * optional int64 home = 3;
- * @return {number?}
+ * optional string email = 3;
+ * @return {string?}
  */
-proto.helloworld.HelloRequestNew.prototype.getHome = function() {
-  return /** @type {number?} */ (jspb.Message.getField(this, 3));
+proto.helloworld.HelloRequestNew.prototype.getEmail = function() {
+  return /** @type {string?} */ (jspb.Message.getField(this, 3));
 };
 
 
-/** @param {number?|undefined} value  */
-proto.helloworld.HelloRequestNew.prototype.setHome = function(value) {
+/** @param {string?|undefined} value  */
+proto.helloworld.HelloRequestNew.prototype.setEmail = function(value) {
   jspb.Message.setOneofField(this, 3, proto.helloworld.HelloRequestNew.oneofGroups_[0], value);
 };
 
 
-proto.helloworld.HelloRequestNew.prototype.clearHome = function() {
+proto.helloworld.HelloRequestNew.prototype.clearEmail = function() {
   jspb.Message.setOneofField(this, 3, proto.helloworld.HelloRequestNew.oneofGroups_[0], undefined);
 };
 

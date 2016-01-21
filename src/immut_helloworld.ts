@@ -75,3 +75,35 @@ export class HelloReply {
 		return HelloReply.fromHelloReply(helloworld.HelloReply.deserializeBinary(buffer));
 	}
 }
+
+export class HelloRequestNew {
+	private underlying: helloworld.HelloRequestNew;
+
+	constructor() {
+		this.underlying = new helloworld.HelloRequestNew();
+	}
+
+	static fromHelloRequestNew(u: helloworld.HelloRequestNew): HelloRequestNew {
+		let ihr = new HelloRequestNew();
+		ihr.underlying = u.cloneMessage();
+		return ihr;
+	}
+
+	SetMessage(message: string): HelloRequestNew {
+		let instance = HelloRequestNew.fromHelloRequestNew(this.underlying.cloneMessage());
+		instance.underlying.setMessage(message);
+		return instance;
+	}
+
+	get Message(): string {
+		return this.underlying.getMessage();
+	}
+
+	Serialize(): ArrayBuffer {
+		return this.underlying.serializeBinary();
+	}
+
+	static Deserialize(buffer: Uint8Array): HelloRequestNew {
+		return HelloRequestNew.fromHelloRequestNew(helloworld.HelloRequestNew.deserializeBinary(buffer));
+	}
+}
