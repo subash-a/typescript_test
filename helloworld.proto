@@ -47,3 +47,12 @@ message HelloRequest {
 message HelloReply {
   string message = 1;
 }
+
+// The request message containing oneof case.
+message Person {
+	string name = 1;
+	oneof contact {
+		string email = 2;
+		uint64 mobile = 3;
+	}
+}

@@ -17,4 +17,17 @@ export namespace helloworld {
 		serializeBinary(): ArrayBuffer;
 		cloneMessage(): HelloReply;
 	}
+	export class Person {
+		static deserializeBinary(arr: Uint8Array): Person;
+		setName(s: string): void;
+		getName(): string;
+		setMobile(n: number): void;
+		getMobile(): number;
+		getEmail(): string;
+		setEmail(e: string): void;
+		getContactCase(): number;
+		serializeBinary(): ArrayBuffer;
+		cloneMessage(): Person;
+	}
+
 }
