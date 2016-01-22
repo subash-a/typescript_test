@@ -1,3 +1,3 @@
 export function Run(): void {
-    console.log("Running app");
+	console.log("Running app");
 }
