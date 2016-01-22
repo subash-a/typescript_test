@@ -6,9 +6,9 @@
 /// <reference path="../typings/react/react-dom.d.ts" />
 /// <reference path="../typings/whatwg-fetch/whatwg-fetch.d.ts" />
 interface Class<T> {
-	new (): T;
+    new (): T;
 }
 
 interface ReactComponentClass<P> {
-	new (props?: P, context?: {}): __React.Component<P, {}>;
+    new (props?: P, context?: {}): __React.Component<P, {}>;
 }
