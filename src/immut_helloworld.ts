@@ -99,9 +99,13 @@ export class Person {
     }
 
     SetName(name: string): Person {
-        let instance = Person.fromPerson(this.underlying.cloneMessage());
-        instance.underlying.setName(name);
-        return instance;
+		if(this.underlying.getName() === name) {
+			return this;
+		} else {
+			let instance = Person.fromPerson(this.underlying.cloneMessage());
+			instance.underlying.setName(name);
+			return instance;
+		}
     }
 
     get Name(): string {
@@ -109,9 +113,15 @@ export class Person {
     }
 
     SetMobile(num: Uint64): Person {
-        let instance = Person.fromPerson(this.underlying.cloneMessage());
-        instance.underlying.setMobile(num.toNumber());
-        return instance;
+		/* This logic is to ensure that if underlying value has not changed
+		 * return the same instance */
+		if(this.underlying.getMobile() === num.toNumber()) {
+			return this;
+		} else {
+			let instance = Person.fromPerson(this.underlying.cloneMessage());
+			instance.underlying.setMobile(num.toNumber());
+			return instance;
+		}
     }
 
     get Mobile(): Uint64 {
@@ -119,9 +129,13 @@ export class Person {
     }
 
     SetEmail(e: string): Person {
-        let instance = Person.fromPerson(this.underlying.cloneMessage());
-        instance.underlying.setEmail(e);
-        return instance;
+		if(this.underlying.getEmail() === e) {
+			return this;
+		} else {
+			let instance = Person.fromPerson(this.underlying.cloneMessage());
+			instance.underlying.setEmail(e);
+			return instance;
+		}
     }
 
     get Email(): string {
