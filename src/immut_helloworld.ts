@@ -19,9 +19,13 @@ export class HelloRequest {
 	}
 
 	SetName(name: string): HelloRequest {
-		let instance = HelloRequest.fromHelloRequest(this.underlying.cloneMessage());
-		instance.underlying.setName(name);
-		return instance;
+		if (this.underlying.getName() === name) {
+			return this;
+		} else {
+			let instance = HelloRequest.fromHelloRequest(this.underlying.cloneMessage());
+			instance.underlying.setName(name);
+			return instance;
+		}
 	}
 
 	get Name(): string {
@@ -29,9 +33,13 @@ export class HelloRequest {
 	}
 
 	SetAge(age: Uint64): HelloRequest {
-		let instance = HelloRequest.fromHelloRequest(this.underlying.cloneMessage());
-		instance.underlying.setAge(age.toNumber());
-		return instance;
+		if (this.underlying.getAge() === age.toNumber()) {
+			return this;
+		} else {
+			let instance = HelloRequest.fromHelloRequest(this.underlying.cloneMessage());
+			instance.underlying.setAge(age.toNumber());
+			return instance;
+		}
 	}
 
 	get Age(): Uint64 {
@@ -61,9 +69,13 @@ export class HelloReply {
 	}
 
 	SetMessage(message: string): HelloReply {
-		let instance = HelloReply.fromHelloReply(this.underlying.cloneMessage());
-		instance.underlying.setMessage(message);
-		return instance;
+		if (this.underlying.getMessage() === message) {
+			return this;
+		} else {
+			let instance = HelloReply.fromHelloReply(this.underlying.cloneMessage());
+			instance.underlying.setMessage(message);
+			return instance;
+		}
 	}
 
 	get Message(): string {
@@ -119,8 +131,18 @@ export class Person {
 			return this;
 		} else {
 			let instance = Person.fromPerson(this.underlying.cloneMessage());
-			/* This logic handles the clearing of field in the oneof case */
-			instance.underlying.setMobile(num === undefined || num === null ? undefined : num.toNumber());
+			instance.underlying.setMobile(num.toNumber());
+			return instance;
+		}
+	}
+
+	/* This logic handles the clearing of field in the oneof case */
+	ClearMobile(): Person {
+		if (this.underlying.getMobile() === undefined || this.underlying.getMobile() === null) {
+			return this;
+		} else {
+			let instance = Person.fromPerson(this.underlying.cloneMessage());
+			instance.underlying.clearMobile();
 			return instance;
 		}
 	}
@@ -135,6 +157,16 @@ export class Person {
 		} else {
 			let instance = Person.fromPerson(this.underlying.cloneMessage());
 			instance.underlying.setEmail(e === undefined || e === null ? undefined : e);
+			return instance;
+		}
+	}
+
+	ClearEmail(): Person {
+		if (this.underlying.getEmail() === undefined || this.underlying.getEmail() === null) {
+			return this;
+		} else {
+			let instance = Person.fromPerson(this.underlying.cloneMessage());
+			instance.underlying.clearEmail();
 			return instance;
 		}
 	}

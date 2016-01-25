@@ -22,8 +22,10 @@ export namespace helloworld {
 		setName(s: string): void;
 		getName(): string;
 		setMobile(n: number): void;
+		clearMobile(): void;
 		getMobile(): number;
 		getEmail(): string;
+		clearEmail(): void;
 		setEmail(e: string): void;
 		getContactCase(): number;
 		serializeBinary(): ArrayBuffer;
