@@ -119,7 +119,8 @@ export class Person {
 			return this;
 		} else {
 			let instance = Person.fromPerson(this.underlying.cloneMessage());
-			instance.underlying.setMobile(num.toNumber());
+			/* This logic handles the clearing of field in the oneof case */
+			instance.underlying.setMobile(num === undefined || num === null ? undefined : num.toNumber());
 			return instance;
 		}
     }
@@ -133,7 +134,7 @@ export class Person {
 			return this;
 		} else {
 			let instance = Person.fromPerson(this.underlying.cloneMessage());
-			instance.underlying.setEmail(e);
+			instance.underlying.setEmail(e === undefined || e === null ? undefined : e);
 			return instance;
 		}
     }
