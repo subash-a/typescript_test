@@ -132,7 +132,7 @@ export class Person {
         return this.underlying.serializeBinary();
     }
 
-    ContactFieldSet(): PersonContactEnum {
+    GetContactCase(): PersonContactEnum {
         return this.underlying.getContactCase();
     }
 }

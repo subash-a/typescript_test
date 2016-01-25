@@ -87,7 +87,7 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
         let person = this.state.contact_info;
 
         let contactInfo = "";
-        switch (person.ContactFieldSet()) {
+        switch (person.GetContactCase()) {
             case PersonContactEnum.NOT_SET:
                 contactInfo = "No Contact Information has been set";
                 break;
