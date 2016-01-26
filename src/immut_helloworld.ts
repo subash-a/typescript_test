@@ -127,7 +127,7 @@ export class Person {
 	SetMobile(num: Uint64): Person {
 		/* This logic is to ensure that if underlying value has not changed
 		 * return the same instance */
-		if(num === undefined || num === null) {
+		if (num === undefined || num === null) {
 			return this.ClearMobile();
 		} else {
 			if (this.underlying.getMobile() === num.toNumber()) {
@@ -156,7 +156,7 @@ export class Person {
 	}
 
 	SetEmail(e: string): Person {
-		if(e === undefined || e === null) {
+		if (e === undefined || e === null) {
 			return this.ClearEmail();
 		} else {
 			if (this.underlying.getEmail() === e) {
