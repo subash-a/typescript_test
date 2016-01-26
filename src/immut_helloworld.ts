@@ -156,7 +156,7 @@ export class Person {
 			return this;
 		} else {
 			let instance = Person.fromPerson(this.underlying.cloneMessage());
-			instance.underlying.setEmail(e === undefined || e === null ? undefined : e);
+			instance.underlying.setEmail(e);
 			return instance;
 		}
 	}
