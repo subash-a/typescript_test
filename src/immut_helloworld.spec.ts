@@ -1,8 +1,9 @@
 import {Uint64} from "./custom_types";
 import {helloworld} from "./helloworld";
-import {HelloRequest, Person, HelloReply} from "./immut_helloworld";
+import {HelloRequest, Person, HelloReply, PersonContactEnum} from "./immut_helloworld";
 
 describe("HelloRequest", () => {
+
 	describe("New HelloRequest", () => {
 		it("should create a new instance without throwing error", () => {
 			expect(() => new HelloRequest()).not.toThrow();
@@ -16,12 +17,21 @@ describe("HelloRequest", () => {
 			request = new HelloRequest();
 		});
 
-		describe("SetName", () => {
-			it("should throw error when undefined is passed", () => {
-				expect(() => request.SetName(undefined)).toThrow();
+		describe("with a known starting state", () => {
+			it("should have appropriate values set", () => {
+				expect(request.Name).toEqual("");
+				expect(request.Age).toEqual(Uint64(0));
 			});
-			it("should throw error when null is passed", () => {
-				expect(() => request.SetName(null)).toThrow();
+		});
+
+		describe("SetName", () => {
+			it("should not modify default value when undefined is passed", () => {
+				expect(() => request.SetName(undefined)).not.toThrow();
+				expect(request["underlying"].getName()).toEqual("");
+			});
+			it("should not modify default value when null is passed", () => {
+				expect(() => request.SetName(null)).not.toThrow();
+				expect(request["underlying"].getName()).toEqual("");
 			});
 			it("should set the name property when a valid value is passed", () => {
 				let modifiedRequest = request.SetName("modelogiq");
@@ -30,11 +40,13 @@ describe("HelloRequest", () => {
 		});
 
 		describe("SetAge", () => {
-			it("should throw error when undefined is passed", () => {
+			it("should not modify the default value when undefined is passed", () => {
 				expect(() => request.SetAge(undefined)).toThrow();
+				expect(request["underlying"].getAge()).toEqual(0);
 			});
-			it("should throw error when null is passed", () => {
-				expect(() => request.SetName(null)).toThrow();
+			it("should not modify the default value when null is passed", () => {
+				expect(() => request.SetAge(null)).toThrow();
+				expect(request["underlying"].getAge()).toEqual(0);
 			});
 			it("should set the age property when a valid value is passed", () => {
 				let modifiedRequest = request.SetAge(Uint64(25));
@@ -85,30 +97,227 @@ describe("HelloRequest", () => {
 				let serializedSource = new Uint8Array((new HelloRequest()).Serialize());
 				HelloRequest.Deserialize(serializedSource);
 				expect(helloworld["HelloRequest"].deserializeBinary).toHaveBeenCalled();
-
 			});
 		});
 	});
 });
 
 describe("HelloReply", () => {
-	describe("New HelloReply", () => { });
-	describe("SetMessage", () => { });
-	describe("Serialize", () => { });
-	describe("Deserialize", () => { });
-	describe("Message", () => { });
+
+	describe("New HelloReply", () => {
+		it("should not throw an error when creating a new instance", () => {
+			expect(() => new HelloReply()).not.toThrow();
+		});
+	});
+
+	describe("with a new HelloReply instance", () => {
+		let reply: HelloReply;
+
+		beforeEach(() => {
+			reply = new HelloReply();
+		});
+
+		describe("with a known starting state", () => {
+
+			it("should have appropriate values set", () => {
+				expect(reply.Message).toEqual("");
+			});
+
+			describe("SetMessage", () => {
+				it("should not modify default value when undefined is passed", () => {
+					let modifiedReply = reply.SetMessage(undefined);
+					expect(modifiedReply["underlying"].getMessage()).toEqual("");
+				});
+				it("should not modify default value when null is passed", () => {
+					let modifiedReply = reply.SetMessage(null);
+					expect(modifiedReply["underlying"].getMessage()).toEqual("");
+				});
+				it("should set the name property when a valid value is passed", () => {
+					let modifiedReply = reply.SetMessage("modelogiq");
+					expect(modifiedReply["underlying"].getMessage()).toEqual("modelogiq");
+				});
+			});
+
+			describe("Message", () => {
+				it("should return empty string when no value is set", () => {
+					expect(reply.Message).toBeDefined();
+					expect(reply.Message.length).toEqual(0);
+				});
+				it("should return value when a valid entry exists", () => {
+					reply["underlying"].setMessage("modelogiq");
+					expect(reply.Message).toEqual("modelogiq");
+				});
+				it("should return type string", () => {
+					reply["underlying"].setMessage("modelogiq");
+					expect(typeof reply.Message === "string").toEqual(true);
+				});
+			});
+
+			describe("Serialize", () => {
+				it("should call the underlying serialize function", () => {
+					spyOn(reply["underlying"], "serializeBinary");
+					reply.Serialize();
+					expect(reply["underlying"].serializeBinary).toHaveBeenCalled();
+				});
+			});
+
+			describe("Deserialize", () => {
+				it("should call the deserialize function", () => {
+					spyOn(helloworld.HelloReply, "deserializeBinary").and.callThrough();
+					let serializedSource = new Uint8Array((new HelloReply()).Serialize());
+					HelloReply.Deserialize(serializedSource);
+					expect(helloworld["HelloReply"].deserializeBinary).toHaveBeenCalled();
+				});
+			});
+		});
+	});
 });
 
 describe("Person", () => {
-	describe("New Person", () => { });
-	describe("SetName", () => { });
-	describe("SetEmail", () => { });
-	describe("SetMobile", () => { });
-	describe("ClearEmail", () => { });
-	describe("ClearMobile", () => { });
-	describe("Serialize", () => { });
-	describe("Deserialize", () => { });
-	describe("GetContactCase", () => { });
-	describe("Email", () => { });
-	describe("Mobile", () => { });
+
+	describe("New Person", () => {
+		it("should not throw error when a new instance is created", () => {
+			expect(() => new Person()).not.toThrow();
+		});
+	});
+
+	describe("with a new Person instance", () => {
+
+		let person: Person;
+
+		beforeEach(() => {
+			person = new Person();
+		});
+
+		describe("with a known starting state", () => {
+
+			it("should have appropriate values set", () => {
+				expect(person.Name).toEqual("");
+				expect(person.Email).not.toBeDefined();
+				expect(() => person.Mobile).toThrow();// This would throw error since it is trying to convert undefined into a Uint64
+				expect(person.GetContactCase()).toEqual(PersonContactEnum.NOT_SET);
+			});
+
+			describe("SetName", () => {
+				it("should not modify default value when undefined is passed", () => {
+					let modifiedPerson = person.SetName(undefined);
+					expect(modifiedPerson["underlying"].getName()).toEqual("");
+				});
+				it("should not modify default value when null is passed", () => {
+					let modifiedPerson = person.SetName(null);
+					expect(modifiedPerson["underlying"].getName()).toEqual("");
+				});
+				it("should set the name property when a valid value is passed", () => {
+					let modifiedPerson = person.SetName("modelogiq");
+					expect(modifiedPerson["underlying"].getName()).toEqual("modelogiq");
+				});
+			});
+
+			describe("SetEmail", () => {
+				it("should not modify default value when undefined is passed", () => {
+					let modifiedPerson = person.SetEmail(undefined);
+					expect(modifiedPerson["underlying"].getEmail()).not.toBeDefined();
+				});
+				it("should not modify the default value when null is passed", () => {
+					let modifiedPerson = person.SetEmail(null);
+					expect(modifiedPerson["underlying"].getEmail()).not.toBeDefined();
+				});
+				it("should set the Email value when a valid entry is passed", () => {
+					let modifiedPerson = person.SetEmail("frontend@modelogiq.com");
+					expect(modifiedPerson["underlying"].getEmail()).toEqual("frontend@modelogiq.com");
+				});
+			});
+
+			describe("SetMobile", () => {
+				it("should not modify default value when undefined is passed", () => {
+					let modifiedPerson = person.SetMobile(undefined);
+					expect(modifiedPerson["underlying"].getMobile()).not.toBeDefined();
+				});
+				it("should not modify the default value when null is passed", () => {
+					let modifiedPerson = person.SetMobile(null);
+					expect(modifiedPerson["underlying"].getMobile()).not.toBeDefined();
+				});
+				it("should set the Mobile value when a valid entry is passed", () => {
+					let modifiedPerson = person.SetMobile(Uint64(9000000000));
+					expect(modifiedPerson["underlying"].getMobile()).toEqual(9000000000);
+				});
+			});
+
+			describe("ClearEmail", () => {
+				it("should clear a previously set value", () => {
+					person["underlying"].setEmail("frontend@modelogiq.com");
+					let modifiedPerson = person.ClearEmail();
+					expect(modifiedPerson["underlying"].getEmail()).not.toBeDefined();
+				});
+			});
+
+			describe("ClearMobile", () => {
+				it("should clear a previously set value", () => {
+					person["underlying"].setMobile(9000000000);
+					let modifiedPerson = person.ClearMobile();
+					expect(modifiedPerson["underlying"].getMobile()).not.toBeDefined();
+				});
+			});
+
+			describe("GetContactCase", () => {
+				it("should call the underlying getContactCase function", () => {
+					spyOn(person["underlying"], "getContactCase");
+					person.GetContactCase();
+					expect(person["underlying"].getContactCase).toHaveBeenCalled();
+				});
+			});
+
+			describe("Name", () => {
+				it("should return empty string when no value is set", () => {
+					expect(person.Name).toBeDefined();
+					expect(person.Name.length).toEqual(0);
+				});
+				it("should return value when a valid entry exists", () => {
+					person["underlying"].setName("modelogiq");
+					expect(person.Name).toEqual("modelogiq");
+				});
+				it("should return type string", () => {
+					person["underlying"].setName("modelogiq");
+					expect(typeof person.Name === "string").toEqual(true);
+				});
+			});
+
+			describe("Email", () => {
+				it("should return undefined when no value is set", () => {
+					expect(person.Email).not.toBeDefined();
+				});
+				it("should return a string when a value is set", () => {
+					person["underlying"].setEmail("frontend@modelogiq.com");
+					expect(person.Email).toEqual("frontend@modelogiq.com");
+				});
+			});
+
+			describe("Mobile", () => {
+				it("should throw error when no value is set", () => {
+					expect(() => person.Mobile).toThrow();
+				});
+				it("should return Uint64 when a value is set", () => {
+					person["underlying"].setMobile(9000000000);
+					expect(person.Mobile).toEqual(Uint64(9000000000));
+				});
+			});
+
+			describe("Serialize", () => {
+				it("should call the underlying serialize function", () => {
+					spyOn(person["underlying"], "serializeBinary");
+					person.Serialize();
+					expect(person["underlying"].serializeBinary).toHaveBeenCalled();
+				});
+			});
+
+			describe("Deserialize", () => {
+				it("should call the deserialize function", () => {
+					spyOn(helloworld.Person, "deserializeBinary").and.callThrough();
+					let serializedSource = new Uint8Array((new Person()).Serialize());
+					Person.Deserialize(serializedSource);
+					expect(helloworld["Person"].deserializeBinary).toHaveBeenCalled();
+				});
+			});
+		});
+	});
 });

@@ -126,13 +126,17 @@ export class Person {
 
 	SetMobile(num: Uint64): Person {
 		/* This logic is to ensure that if underlying value has not changed
-			* return the same instance */
-		if (this.underlying.getMobile() === num.toNumber()) {
-			return this;
+		 * return the same instance */
+		if(num === undefined || num === null) {
+			return this.ClearMobile();
 		} else {
-			let instance = Person.fromPerson(this.underlying.cloneMessage());
-			instance.underlying.setMobile(num.toNumber());
-			return instance;
+			if (this.underlying.getMobile() === num.toNumber()) {
+				return this;
+			} else {
+				let instance = Person.fromPerson(this.underlying.cloneMessage());
+				instance.underlying.setMobile(num.toNumber());
+				return instance;
+			}
 		}
 	}
 
@@ -152,12 +156,16 @@ export class Person {
 	}
 
 	SetEmail(e: string): Person {
-		if (this.underlying.getEmail() === e) {
-			return this;
+		if(e === undefined || e === null) {
+			return this.ClearEmail();
 		} else {
-			let instance = Person.fromPerson(this.underlying.cloneMessage());
-			instance.underlying.setEmail(e);
-			return instance;
+			if (this.underlying.getEmail() === e) {
+				return this;
+			} else {
+				let instance = Person.fromPerson(this.underlying.cloneMessage());
+				instance.underlying.setEmail(e);
+				return instance;
+			}
 		}
 	}
 
