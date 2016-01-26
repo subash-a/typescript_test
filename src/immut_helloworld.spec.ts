@@ -92,23 +92,23 @@ describe("HelloRequest", () => {
 });
 
 describe("HelloReply", () => {
-	describe("New HelloReply", () => {});
-	describe("SetMessage", () => {});
-	describe("Serialize", () => {});
-	describe("Deserialize", () => {});
-	describe("Message", () => {});
+	describe("New HelloReply", () => { });
+	describe("SetMessage", () => { });
+	describe("Serialize", () => { });
+	describe("Deserialize", () => { });
+	describe("Message", () => { });
 });
 
 describe("Person", () => {
-	describe("New Person", () => {});
-	describe("SetName", () => {});
-	describe("SetEmail", () => {});
-	describe("SetMobile", () => {});
-	describe("ClearEmail", () => {});
-	describe("ClearMobile", () => {});
-	describe("Serialize", () => {});
-	describe("Deserialize", () => {});
-	describe("GetContactCase", () => {});
-	describe("Email", () => {});
-	describe("Mobile", () => {});
+	describe("New Person", () => { });
+	describe("SetName", () => { });
+	describe("SetEmail", () => { });
+	describe("SetMobile", () => { });
+	describe("ClearEmail", () => { });
+	describe("ClearMobile", () => { });
+	describe("Serialize", () => { });
+	describe("Deserialize", () => { });
+	describe("GetContactCase", () => { });
+	describe("Email", () => { });
+	describe("Mobile", () => { });
 });
