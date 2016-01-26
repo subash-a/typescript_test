@@ -194,7 +194,7 @@ describe("Person", () => {
 			it("should have appropriate values set", () => {
 				expect(person.Name).toEqual("");
 				expect(person.Email).not.toBeDefined();
-				expect(() => person.Mobile).toThrow();// This would throw error since it is trying to convert undefined into a Uint64
+				expect(() => person.Mobile).toThrow(); // This would throw error since it is trying to convert undefined into a Uint64
 				expect(person.GetContactCase()).toEqual(PersonContactEnum.NOT_SET);
 			});
 
