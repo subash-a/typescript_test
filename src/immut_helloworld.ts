@@ -1,6 +1,11 @@
 import {Uint64} from "./custom_types";
 import {helloworld} from "./helloworld";
 
+export const PROTOBUF_DEFAULT_NORMAL_STRING: string = "";
+export const PROTOBUF_DEFAULT_NORMAL_UINT64: Uint64 = Uint64(0);
+export const PROTOBUF_DEFAULT_ONEOF_STRING: string = undefined;
+export const PROTOBUF_DEFAULT_ONEOF_UINT64: Uint64 = undefined;
+
 export class HelloRequest {
 	private underlying: helloworld.HelloRequest;
 
@@ -19,7 +24,9 @@ export class HelloRequest {
 	}
 
 	SetName(name: string): HelloRequest {
-		if (this.underlying.getName() === name) {
+		if((this.underlying.getName() === "") && (name === undefined || name === null)) {
+			return this;
+		} else if (this.underlying.getName() === name) {
 			return this;
 		} else {
 			let instance = HelloRequest.fromHelloRequest(this.underlying.cloneMessage());
@@ -33,7 +40,9 @@ export class HelloRequest {
 	}
 
 	SetAge(age: Uint64): HelloRequest {
-		if (this.underlying.getAge() === age.toNumber()) {
+		if((this.underlying.getAge() === 0) && (age === undefined || age === null)) {
+			return this;
+		} else if (this.underlying.getAge() === age.toNumber()) {
 			return this;
 		} else {
 			let instance = HelloRequest.fromHelloRequest(this.underlying.cloneMessage());
@@ -69,7 +78,9 @@ export class HelloReply {
 	}
 
 	SetMessage(message: string): HelloReply {
-		if (this.underlying.getMessage() === message) {
+		if((this.underlying.getMessage() === "") && (message === undefined || message === null)) {
+			return this;
+		} else if (this.underlying.getMessage() === message) {
 			return this;
 		} else {
 			let instance = HelloReply.fromHelloReply(this.underlying.cloneMessage());
@@ -111,7 +122,9 @@ export class Person {
 	}
 
 	SetName(name: string): Person {
-		if (this.underlying.getName() === name) {
+		if((this.underlying.getName() === "") && (name === undefined || name === null)) {
+			return this;
+		} else if (this.underlying.getName() === name) {
 			return this;
 		} else {
 			let instance = Person.fromPerson(this.underlying.cloneMessage());
@@ -152,7 +165,8 @@ export class Person {
 	}
 
 	get Mobile(): Uint64 {
-		return Uint64(this.underlying.getMobile());
+		let mobile = this.underlying.getMobile();
+		return (mobile === undefined ? undefined : Uint64(mobile));
 	}
 
 	SetEmail(e: string): Person {
@@ -180,7 +194,8 @@ export class Person {
 	}
 
 	get Email(): string {
-		return this.underlying.getEmail();
+		let email = this.underlying.getEmail();
+		return (email === undefined ? undefined : email);
 	}
 
 	Serialize(): ArrayBuffer {
