@@ -101,13 +101,12 @@ export class HelloReply {
 export type ContactEnum = helloworld.ContactEnum;
 
 export class Person {
+	static ContactCase = helloworld.Person.ContactCase;
 	private underlying: helloworld.Person;
 
 	constructor() {
 		this.underlying = new helloworld.Person();
 	}
-
-	static ContactCase = helloworld.Person.ContactCase;
 
 	static fromPerson(u: helloworld.Person): Person {
 		let ihr = new Person();

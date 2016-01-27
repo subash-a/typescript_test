@@ -18,8 +18,8 @@ export namespace helloworld {
 		cloneMessage(): HelloReply;
 	}
 	export class Person {
-		static deserializeBinary(arr: Uint8Array): Person;
 		static ContactCase: typeof ContactEnum;
+		static deserializeBinary(arr: Uint8Array): Person;
 		setName(s: string): void;
 		getName(): string;
 		setMobile(n: number): void;
