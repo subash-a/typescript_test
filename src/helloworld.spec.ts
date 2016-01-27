@@ -18,7 +18,7 @@ describe("Person", () => {
 				expect(person.getName()).toEqual("");
 				expect(person.getEmail()).not.toBeDefined();
 				expect(person.getMobile()).not.toBeDefined();
-				expect(person.getContactCase()).toEqual(0);
+				expect(person.getContactCase()).toEqual(helloworld.Person.ContactCase.CONTACT_NOT_SET);
 			});
 
 			describe("with a known starting state", () => {

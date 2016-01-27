@@ -98,9 +98,7 @@ export class HelloReply {
 	}
 }
 
-// Re-exporting the enum which is available through helloworld.d.ts
-export type PersonContactEnum = helloworld.ContactCase;
-export var PersonContactEnum = helloworld.ContactCase;
+export type ContactEnum = helloworld.ContactEnum;
 
 export class Person {
 	private underlying: helloworld.Person;
@@ -108,6 +106,8 @@ export class Person {
 	constructor() {
 		this.underlying = new helloworld.Person();
 	}
+
+	static ContactCase = helloworld.Person.ContactCase;
 
 	static fromPerson(u: helloworld.Person): Person {
 		let ihr = new Person();
@@ -200,7 +200,7 @@ export class Person {
 		return this.underlying.serializeBinary();
 	}
 
-	GetContactCase(): PersonContactEnum {
+	GetContactCase(): ContactEnum {
 		return this.underlying.getContactCase();
 	}
 }

@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {curry} from "./lang";
 import {Uint64} from "./custom_types";
-import {HelloRequest, Person, PersonContactEnum} from "./immut_helloworld";
+import {HelloRequest, Person, ContactEnum} from "./immut_helloworld";
 import {Backend} from "./api_endpoint";
 
 interface ComponentAProps<T> {
@@ -12,7 +12,7 @@ interface ComponentAProps<T> {
 interface ComponentAState {
 	responses?: string;
 	greeting?: string;
-	contact_type?: PersonContactEnum;
+	contact_type?: ContactEnum;
 	contact_info?: Person;
 	contact_text?: string;
 }
@@ -20,7 +20,7 @@ interface ComponentAState {
 class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentAState> {
 	constructor(props?: ComponentAProps<T>) {
 		super(props);
-		this.state = { responses: "", greeting: "hello world!", contact_type: PersonContactEnum.CONTACT_NOT_SET, contact_info: new Person(), contact_text: "" };
+		this.state = { responses: "", greeting: "hello world!", contact_type: Person.ContactCase.CONTACT_NOT_SET, contact_info: new Person(), contact_text: "" };
 	}
 
 	render(): JSX.Element {
@@ -37,20 +37,20 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
 								 onClick={curry(this.setEmailContact, this) }/>
 							 <label> Email </label>
 							 <input type="text" id="contact-email"
-								 value={this.state.contact_type === PersonContactEnum.EMAIL ? this.state.contact_text : ""}
+								 value={this.state.contact_type === Person.ContactCase.EMAIL ? this.state.contact_text : ""}
 								 ref="contact-email"
 								 onChange={curry(this.updateContactInformation, this) }
-								 disabled={this.state.contact_type === PersonContactEnum.EMAIL ? false : true} />
+								 disabled={this.state.contact_type === Person.ContactCase.EMAIL ? false : true} />
 								</div>
 						 <div style={{ margin: "5px", padding: "5px" }}>
 							 <input type="radio" name="contact-group" id="personal-mobile"
 								 onClick={curry(this.setMobileContact, this) }/>
 							 <label> Mobile </label>
 							 <input type="text" id="contact-mobile"
-								 value={this.state.contact_type === PersonContactEnum.MOBILE ? this.state.contact_text : ""}
+								 value={this.state.contact_type === Person.ContactCase.MOBILE ? this.state.contact_text : ""}
 								 ref="contact-mobile"
 								 onChange={curry(this.updateContactInformation, this) }
-								 disabled={this.state.contact_type === PersonContactEnum.MOBILE ? false : true}/>
+								 disabled={this.state.contact_type === Person.ContactCase.MOBILE ? false : true}/>
 								</div>
 
 						 <button id="set-contact-info"
@@ -60,16 +60,16 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
 	}
 
 	private setNoContact(): void {
-		this.setState({ contact_type: PersonContactEnum.CONTACT_NOT_SET, contact_text: "" });
+		this.setState({ contact_type: Person.ContactCase.CONTACT_NOT_SET, contact_text: "" });
 	}
 
 	private setEmailContact(): void {
-		this.setState({ contact_type: PersonContactEnum.EMAIL, contact_text: "" });
+		this.setState({ contact_type: Person.ContactCase.EMAIL, contact_text: "" });
 		(ReactDOM.findDOMNode(this.refs["contact-email"]) as HTMLElement).focus();
 	}
 
 	private setMobileContact(): void {
-		this.setState({ contact_type: PersonContactEnum.MOBILE, contact_text: "" });
+		this.setState({ contact_type: Person.ContactCase.MOBILE, contact_text: "" });
 		(ReactDOM.findDOMNode(this.refs["contact-mobile"]) as HTMLElement).focus();
 	}
 
@@ -87,11 +87,11 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
 			person = person.SetName(name);
 		}
 		switch (this.state.contact_type) {
-			case PersonContactEnum.CONTACT_NOT_SET:
+			case Person.ContactCase.CONTACT_NOT_SET:
 				person = person.ClearEmail();
 				person = person.ClearMobile();
 				break;
-			case PersonContactEnum.MOBILE:
+			case Person.ContactCase.MOBILE:
 				value = (document.getElementById("contact-mobile") as HTMLInputElement).value;
 				if (value === " " || value.length === 0) {
 					throw new Error("Field cannot be left empty");
@@ -99,7 +99,7 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
 					person = person.SetMobile(Uint64.Parse(value));
 				}
 				break;
-			case PersonContactEnum.EMAIL:
+			case Person.ContactCase.EMAIL:
 				value = (document.getElementById("contact-email") as HTMLInputElement).value;
 				if (value === " " || value.length === 0) {
 					throw new Error("Field cannot be left empty");
@@ -123,13 +123,13 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
 		let name = person.Name ? person.Name : "No Name Set";
 		let contactInfo = "";
 		switch (person.GetContactCase()) {
-			case PersonContactEnum.CONTACT_NOT_SET:
+			case Person.ContactCase.CONTACT_NOT_SET:
 				contactInfo = "No Contact Information has been set";
 				break;
-			case PersonContactEnum.MOBILE:
+			case Person.ContactCase.MOBILE:
 				contactInfo = "Mobile: " + person.Mobile.toNumber();
 				break;
-			case PersonContactEnum.EMAIL:
+			case Person.ContactCase.EMAIL:
 				contactInfo = "Email: " + person.Email;
 				break;
 			default:

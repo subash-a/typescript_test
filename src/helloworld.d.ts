@@ -19,6 +19,7 @@ export namespace helloworld {
 	}
 	export class Person {
 		static deserializeBinary(arr: Uint8Array): Person;
+		static ContactCase: typeof ContactEnum;
 		setName(s: string): void;
 		getName(): string;
 		setMobile(n: number): void;
@@ -32,7 +33,7 @@ export namespace helloworld {
 		cloneMessage(): Person;
 	}
 
-	export enum ContactCase {
+	export enum ContactEnum {
 		CONTACT_NOT_SET = 0,
 		EMAIL = 2,
 		MOBILE = 3

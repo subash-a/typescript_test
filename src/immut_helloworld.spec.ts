@@ -1,6 +1,6 @@
 import {Uint64} from "./custom_types";
 import {helloworld} from "./helloworld";
-import {HelloRequest, Person, HelloReply, PersonContactEnum, PROTOBUF_DEFAULT_NORMAL_STRING, PROTOBUF_DEFAULT_NORMAL_UINT64, PROTOBUF_DEFAULT_ONEOF_STRING, PROTOBUF_DEFAULT_ONEOF_UINT64} from "./immut_helloworld";
+import {HelloRequest, Person, HelloReply, PROTOBUF_DEFAULT_NORMAL_STRING, PROTOBUF_DEFAULT_NORMAL_UINT64, PROTOBUF_DEFAULT_ONEOF_STRING, PROTOBUF_DEFAULT_ONEOF_UINT64} from "./immut_helloworld";
 
 describe("HelloRequest", () => {
 
@@ -261,7 +261,7 @@ describe("Person", () => {
 				expect(person.Name).toEqual("");
 				expect(person.Email).not.toBeDefined();
 				expect(person.Mobile).not.toBeDefined(); // This would throw error since it is trying to convert undefined into a Uint64
-				expect(person.GetContactCase()).toEqual(PersonContactEnum.CONTACT_NOT_SET);
+				expect(person.GetContactCase()).toEqual(Person.ContactCase.CONTACT_NOT_SET);
 			});
 
 			describe("SetName", () => {

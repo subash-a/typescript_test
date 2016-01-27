@@ -606,5 +606,3 @@ proto.helloworld.Person.prototype.setMobile = function(value) {
 proto.helloworld.Person.prototype.clearMobile = function() {
   jspb.Message.setOneofField(this, 3, proto.helloworld.Person.oneofGroups_[0], undefined);
 };
-
-
