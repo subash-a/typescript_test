@@ -32,4 +32,9 @@ export namespace helloworld {
 		cloneMessage(): Person;
 	}
 
+	export enum ContactCase {
+		CONTACT_NOT_SET = 0,
+		EMAIL = 2,
+		MOBILE = 3
+	}
 }

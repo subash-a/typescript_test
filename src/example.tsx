@@ -20,7 +20,7 @@ interface ComponentAState {
 class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentAState> {
 	constructor(props?: ComponentAProps<T>) {
 		super(props);
-		this.state = { responses: "", greeting: "hello world!", contact_type: PersonContactEnum.NOT_SET, contact_info: new Person(), contact_text: "" };
+		this.state = { responses: "", greeting: "hello world!", contact_type: PersonContactEnum.CONTACT_NOT_SET, contact_info: new Person(), contact_text: "" };
 	}
 
 	render(): JSX.Element {
@@ -60,7 +60,7 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
 	}
 
 	private setNoContact(): void {
-		this.setState({ contact_type: PersonContactEnum.NOT_SET, contact_text: "" });
+		this.setState({ contact_type: PersonContactEnum.CONTACT_NOT_SET, contact_text: "" });
 	}
 
 	private setEmailContact(): void {
@@ -87,7 +87,7 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
 			person = person.SetName(name);
 		}
 		switch (this.state.contact_type) {
-			case PersonContactEnum.NOT_SET:
+			case PersonContactEnum.CONTACT_NOT_SET:
 				person = person.ClearEmail();
 				person = person.ClearMobile();
 				break;
@@ -123,7 +123,7 @@ class ComponentADef<T> extends React.Component<ComponentAProps<T>, ComponentASta
 		let name = person.Name ? person.Name : "No Name Set";
 		let contactInfo = "";
 		switch (person.GetContactCase()) {
-			case PersonContactEnum.NOT_SET:
+			case PersonContactEnum.CONTACT_NOT_SET:
 				contactInfo = "No Contact Information has been set";
 				break;
 			case PersonContactEnum.MOBILE:

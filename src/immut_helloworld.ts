@@ -98,11 +98,9 @@ export class HelloReply {
 	}
 }
 
-export enum PersonContactEnum {
-	NOT_SET = 0,
-	EMAIL = 2,
-	MOBILE = 3,
-}
+// Re-exporting the enum which is available through helloworld.d.ts
+export type PersonContactEnum = helloworld.ContactCase;
+export var PersonContactEnum = helloworld.ContactCase;
 
 export class Person {
 	private underlying: helloworld.Person;
