@@ -24,7 +24,7 @@ export class HelloRequest {
 	}
 
 	SetName(name: string): HelloRequest {
-		if((this.underlying.getName() === "") && (name === undefined || name === null)) {
+		if ((this.underlying.getName() === "") && (name === undefined || name === null)) {
 			return this;
 		} else if (this.underlying.getName() === name) {
 			return this;
@@ -40,7 +40,7 @@ export class HelloRequest {
 	}
 
 	SetAge(age: Uint64): HelloRequest {
-		if((this.underlying.getAge() === 0) && (age === undefined || age === null)) {
+		if ((this.underlying.getAge() === 0) && (age === undefined || age === null)) {
 			return this;
 		} else if (this.underlying.getAge() === age.toNumber()) {
 			return this;
@@ -78,7 +78,7 @@ export class HelloReply {
 	}
 
 	SetMessage(message: string): HelloReply {
-		if((this.underlying.getMessage() === "") && (message === undefined || message === null)) {
+		if ((this.underlying.getMessage() === "") && (message === undefined || message === null)) {
 			return this;
 		} else if (this.underlying.getMessage() === message) {
 			return this;
@@ -122,7 +122,7 @@ export class Person {
 	}
 
 	SetName(name: string): Person {
-		if((this.underlying.getName() === "") && (name === undefined || name === null)) {
+		if ((this.underlying.getName() === "") && (name === undefined || name === null)) {
 			return this;
 		} else if (this.underlying.getName() === name) {
 			return this;
