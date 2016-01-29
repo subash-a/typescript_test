@@ -139,6 +139,25 @@ export class TestMessage implements MessageType {
 		return this.underlying.getStringfield();
 	}
 
+	SetUint64Field(num: Uint64): TestMessage {
+		if (num === undefined || num === null) {
+			num = Uint64(0);
+		}
+
+		if (this.underlying.getUint64field() === num.toNumber()) {
+			return this;
+		} else {
+			let instance = TestMessage.fromTestMessage(this.underlying.cloneMessage());
+			instance.underlying.setUint64field(num.toNumber());
+			return instance;
+		}
+	}
+
+	get Uint64Field(): Uint64 {
+		let num = this.underlying.getUint64field();
+		return (num === undefined ? undefined : Uint64(num));
+	}
+
 	SetOneofUint64Field(num: Uint64): TestMessage {
 		/* This logic is to ensure that if underlying value has not changed
 		 * return the same instance */

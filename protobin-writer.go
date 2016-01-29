@@ -1,16 +1,16 @@
 package main
 
 import (
-	"io/ioutil"
-	"github.com/golang/protobuf/proto"
-	"encoding/base64"
-	"os"
 	"bufio"
+	"encoding/base64"
+	"github.com/golang/protobuf/proto"
+	"io/ioutil"
+	"os"
 )
 
 func WriteSerializedObject(filename string, serialized []byte) {
-	e := ioutil.WriteFile(filename, serialized, 0644);
-	if e!= nil {
+	e := ioutil.WriteFile(filename, serialized, 0644)
+	if e != nil {
 		panic(e)
 	}
 }
@@ -45,7 +45,7 @@ func BuildFixture() {
 	stringValue := "modelogiq"
 	uint64Value := uint64(9999999999)
 
-	jsonFile , _ := os.Create("fixtures/serialized.json")
+	jsonFile, _ := os.Create("fixtures/serialized.json")
 	testMessageBufferWriter := bufio.NewWriter(jsonFile)
 	testMessageBufferWriter.WriteString("{\"")
 
@@ -54,11 +54,24 @@ func BuildFixture() {
 	oneofUint64Field := &TestMessage_OneofUint64Field{}
 	oneofUint64Field.OneofUint64Field = uint64Value
 
+	emptyTestMessage := &TestMessage{}
+	bEmptyTestMessage := CreateSerializedTestMessage(emptyTestMessage)
+	testMessageBufferWriter.WriteString("emptyTestMessage\":\"")
+	testMessageBufferWriter.WriteString(CreateBase64String(bEmptyTestMessage))
+	testMessageBufferWriter.WriteString("\",\"")
+
 	testMessageWithString := &TestMessage{}
 	testMessageWithString.StringField = stringValue
 	bTestMessageWithString := CreateSerializedTestMessage(testMessageWithString)
 	testMessageBufferWriter.WriteString("testMessageWithString\":\"")
 	testMessageBufferWriter.WriteString(CreateBase64String(bTestMessageWithString))
+	testMessageBufferWriter.WriteString("\",\"")
+
+	testMessageWithUint64 := &TestMessage{}
+	testMessageWithUint64.Uint64Field = uint64Value
+	bTestMessageWithUint64 := CreateSerializedTestMessage(testMessageWithUint64)
+	testMessageBufferWriter.WriteString("testMessageWithUint64\":\"")
+	testMessageBufferWriter.WriteString(CreateBase64String(bTestMessageWithUint64))
 	testMessageBufferWriter.WriteString("\",\"")
 
 	testMessageWithOneofString := &TestMessage{}
