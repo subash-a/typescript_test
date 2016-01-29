@@ -51,12 +51,14 @@ describe("TestMessage", () => {
 				expect(testMessage.GetOneofFieldCase()).toEqual(TestMessage.OneoffieldCase.ONEOFFIELD_NOT_SET);
 			});
 
-			describe("SetStringField & StringField", () => {
+			describe("String Field", () => {
 				it("should return the original instance when undefined value is passed", () => {
 					let modifiedTestMessage = testMessage.SetStringField(undefined);
 					expect(modifiedTestMessage).toBe(testMessage);
 					expect(testMessage.StringField).toEqual(PROTOBUF_DEFAULT_NORMAL_STRING);
 					expect(modifiedTestMessage.StringField).toEqual(PROTOBUF_DEFAULT_NORMAL_STRING);
+					expect(verifyWithSerialization(testMessage, serializedJSON["emptyTestMessage"])).toBe(true);
+					expect(verifyWithSerialization(modifiedTestMessage, serializedJSON["emptyTestMessage"])).toBe(true);
 				});
 
 				it("should return the original instance when null value is passed", () => {
@@ -64,12 +66,15 @@ describe("TestMessage", () => {
 					expect(modifiedTestMessage).toBe(testMessage);
 					expect(testMessage.StringField).toEqual(PROTOBUF_DEFAULT_NORMAL_STRING);
 					expect(modifiedTestMessage.StringField).toEqual(PROTOBUF_DEFAULT_NORMAL_STRING);
+					expect(verifyWithSerialization(testMessage, serializedJSON["emptyTestMessage"])).toBe(true);
+					expect(verifyWithSerialization(modifiedTestMessage, serializedJSON["emptyTestMessage"])).toBe(true);
 				});
 
 				it("should not mutate the original instance when new value is set", () => {
 					let modifiedTestMessage = testMessage.SetStringField("modelogiq");
 					expect(modifiedTestMessage).not.toBe(testMessage);
 					expect(testMessage.StringField).toEqual(PROTOBUF_DEFAULT_NORMAL_STRING);
+					expect(verifyWithSerialization(testMessage, serializedJSON["emptyTestMessage"])).toBe(true);
 				});
 
 				it("should set name correctly and return a new instance when a valid value is passed", () => {
@@ -84,6 +89,51 @@ describe("TestMessage", () => {
 					expect(modifiedAgainTestMessage).toBe(modifiedTestMessage);
 					expect(modifiedAgainTestMessage.StringField).toEqual("modelogiq");
 					expect(modifiedTestMessage.StringField).toEqual("modelogiq");
+					expect(verifyWithSerialization(modifiedTestMessage, serializedJSON["testMessageWithString"])).toBe(true);
+					expect(verifyWithSerialization(modifiedAgainTestMessage, serializedJSON["testMessageWithString"])).toBe(true);
+				});
+			});
+
+			describe("Uint64 Field", () => {
+				it("should return the original instance when undefined value is passed", () => {
+					let modifiedTestMessage = testMessage.SetUint64Field(undefined);
+					expect(modifiedTestMessage).toBe(testMessage);
+					expect(testMessage.Uint64Field).toEqual(PROTOBUF_DEFAULT_NORMAL_UINT64);
+					expect(modifiedTestMessage.Uint64Field).toEqual(PROTOBUF_DEFAULT_NORMAL_UINT64);
+					expect(verifyWithSerialization(testMessage, serializedJSON["emptyTestMessage"])).toBe(true);
+					expect(verifyWithSerialization(modifiedTestMessage, serializedJSON["emptyTestMessage"])).toBe(true);
+				});
+
+				it("should return the original instance when null value is passed", () => {
+					let modifiedTestMessage = testMessage.SetUint64Field(null);
+					expect(modifiedTestMessage).toBe(testMessage);
+					expect(testMessage.Uint64Field).toEqual(PROTOBUF_DEFAULT_NORMAL_UINT64);
+					expect(modifiedTestMessage.Uint64Field).toEqual(PROTOBUF_DEFAULT_NORMAL_UINT64);
+					expect(verifyWithSerialization(testMessage, serializedJSON["emptyTestMessage"])).toBe(true);
+					expect(verifyWithSerialization(modifiedTestMessage, serializedJSON["emptyTestMessage"])).toBe(true);
+				});
+
+				it("should not mutate the original instance when new value is set", () => {
+					let modifiedTestMessage = testMessage.SetUint64Field(Uint64(9999999999));
+					expect(modifiedTestMessage).not.toBe(testMessage);
+					expect(testMessage.Uint64Field).toEqual(PROTOBUF_DEFAULT_NORMAL_UINT64);
+					expect(verifyWithSerialization(testMessage, serializedJSON["emptyTestMessage"])).toBe(true);
+				});
+
+				it("should set name correctly and return a new instance when a valid value is passed", () => {
+					let modifiedTestMessage = testMessage.SetUint64Field(Uint64(9999999999));
+					expect(modifiedTestMessage.Uint64Field).toEqual(Uint64(9999999999));
+					expect(verifyWithSerialization(modifiedTestMessage, serializedJSON["testMessageWithUint64"])).toBe(true);
+				});
+
+				it("should return the same instance when value is not modified", () => {
+					let modifiedTestMessage = testMessage.SetUint64Field(Uint64(9999999999));
+					let modifiedAgainTestMessage = modifiedTestMessage.SetUint64Field(Uint64(9999999999));
+					expect(modifiedAgainTestMessage).toBe(modifiedTestMessage);
+					expect(modifiedAgainTestMessage.Uint64Field).toEqual(Uint64(9999999999));
+					expect(modifiedTestMessage.Uint64Field).toEqual(Uint64(9999999999));
+					expect(verifyWithSerialization(modifiedTestMessage, serializedJSON["testMessageWithUint64"])).toBe(true);
+					expect(verifyWithSerialization(modifiedAgainTestMessage, serializedJSON["testMessageWithUint64"])).toBe(true);
 				});
 			});
 
