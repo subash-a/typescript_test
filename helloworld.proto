@@ -48,6 +48,10 @@ message HelloReply {
   string message = 1;
 }
 
+message RepeatedMessage {
+	string repeatedMessageStringField = 1;
+	uint64 repeatedMessageUint64Field = 2;
+}
 // The request message containing oneof case.
 message TestMessage {
 	string stringField = 1;
@@ -56,4 +60,9 @@ message TestMessage {
 		string oneofStringField = 2;
 		uint64 oneofUint64Field = 3;
 	}
+	message subMessageField {
+		string subMessageStringField = 1;
+		uint64 subMessageUint64Field = 2;
+	}
+	repeated RepeatedMessage repeatedMessageField = 7;
 }

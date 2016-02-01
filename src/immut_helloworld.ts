@@ -108,6 +108,7 @@ export class TestMessage implements MessageType {
 	static OneoffieldCase = helloworld.TestMessage.OneoffieldCase;
 
 	private underlying: helloworld.TestMessage;
+	private submessage: helloworld.SubMessage;
 
 	constructor() {
 		this.underlying = new helloworld.TestMessage();

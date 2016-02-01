@@ -17,9 +17,28 @@ export namespace helloworld {
 		serializeBinary(): ArrayBuffer;
 		cloneMessage(): HelloReply;
 	}
+	export class SubMessage {
+		static deserializeBinary(arr: Uint8Array): SubMessage;
+		setSubmessagestringfield(s: string): void;
+		getSubmessagestringfield(): string;
+		setSubmessageuint64field(n: number): void;
+		serializeBinary(): ArrayBuffer;
+		cloneMessage(): SubMessage;
+		getSubmessageuint64field(): number;
+	}
+	export class RepeatedMessage {
+		static deserializeBinary(arr: Uint8Array): RepeatedMessage;
+		cloneMessage(): RepeatedMessage;
+		setRepeatedmessagestringfield(s: string): void;
+		getRepeatedmessagestringfield(): string;
+		setRepeatedmessageuint64field(i: number): void;
+		getRepeatedmessageuint64field(): number;
+		serializeBinary(): ArrayBuffer;
+	}
 	export class TestMessage {
 		static OneoffieldCase: typeof OneoffieldEnum;
 		static deserializeBinary(arr: Uint8Array): TestMessage;
+		static subMessageField: new() => SubMessage;
 		setStringfield(s: string): void;
 		getStringfield(): string;
 		setUint64field(s: number): void;
@@ -31,6 +50,8 @@ export namespace helloworld {
 		clearOneofstringfield(): void;
 		setOneofstringfield(e: string): void;
 		getOneoffieldCase(): number;
+		getRepeatedmessagefieldList(): Array<Object>;
+		setRepeatedmessagefieldList(a: Array<Object>): void;
 		serializeBinary(): ArrayBuffer;
 		cloneMessage(): TestMessage;
 	}
