@@ -25,6 +25,7 @@ export namespace helloworld {
 		serializeBinary(): ArrayBuffer;
 		cloneMessage(): SubMessage;
 		getSubmessageuint64field(): number;
+		toObject(): Object;
 	}
 	export class RepeatedMessage {
 		static deserializeBinary(arr: Uint8Array): RepeatedMessage;
@@ -38,7 +39,8 @@ export namespace helloworld {
 	export class TestMessage {
 		static OneoffieldCase: typeof OneoffieldEnum;
 		static deserializeBinary(arr: Uint8Array): TestMessage;
-		static subMessageField: SubMessage;
+		setSubmessagefield(s: helloworld.SubMessage): void;
+		getSubmessagefield(): helloworld.SubMessage;
 		setStringfield(s: string): void;
 		getStringfield(): string;
 		setUint64field(s: number): void;
@@ -50,8 +52,8 @@ export namespace helloworld {
 		clearOneofstringfield(): void;
 		setOneofstringfield(e: string): void;
 		getOneoffieldCase(): number;
-		getRepeatedmessagefieldList(): Array<Object>;
-		setRepeatedmessagefieldList(a: Array<Object>): void;
+		getRepeatedmessagefieldList(): Array<helloworld.RepeatedMessage>;
+		setRepeatedmessagefieldList(a: Array<helloworld.RepeatedMessage>): void;
 		serializeBinary(): ArrayBuffer;
 		cloneMessage(): TestMessage;
 	}

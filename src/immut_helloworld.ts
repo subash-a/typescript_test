@@ -109,17 +109,17 @@ export class SubMessage implements MessageType {
 	private underlying;
 
 	constructor() {
-		this.underlying = new helloworld.TestMessage.subMessageField();
+		this.underlying = new helloworld.SubMessage();
 	}
 
-	static fromSubMessage(underlying: helloworld.SubMessageField): SubMessage {
+	static fromSubMessage(underlying: helloworld.SubMessage): SubMessage {
 		let instance = new SubMessage();
 		instance.underlying = underlying;
 		return instance;
 	}
 
 	static Deserialize(buffer: Uint8Array): SubMessage {
-		return SubMessage.fromSubMessage(helloworld.TestMessage.subMessageField.deserializeBinary(buffer));
+		return SubMessage.fromSubMessage(helloworld.SubMessage.deserializeBinary(buffer));
 	}
 
 	SetSubMessageStringField(s: string): SubMessage {
@@ -141,13 +141,59 @@ export class SubMessage implements MessageType {
 	Serialize(): ArrayBuffer {
 		return this.underlying.serializeBinary();
 	}
+
+	ToObject(): helloworld.SubMessage {
+		return this.underlying;
+	}
+}
+
+export class RepeatedMessage implements MessageType {
+
+	private underlying;
+
+	constructor() {
+		this.underlying = new helloworld.RepeatedMessage();
+	}
+
+	static fromRepeatedMessage(underlying: helloworld.RepeatedMessage): RepeatedMessage {
+		let instance = new RepeatedMessage();
+		instance.underlying = underlying;
+		return instance;
+	}
+
+	static Deserialize(buffer: Uint8Array): RepeatedMessage {
+		return RepeatedMessage.fromRepeatedMessage(helloworld.RepeatedMessage.deserializeBinary(buffer));
+	}
+
+	SetRepeatedMessageStringField(s: string): RepeatedMessage {
+		if ((this.underlying.getSubmessagestringfield() === "") && (name === undefined || name === null)) {
+			return this;
+		} else if (this.underlying.getSubmessagestringfield() === name) {
+			return this;
+		} else {
+			let instance = RepeatedMessage.fromRepeatedMessage(this.underlying.cloneMessage());
+			instance.underlying.setSubmessagestringfield(name);
+			return instance;
+		}
+	}
+
+	get RepeatedMessageStringField(): string {
+		return this.underlying.getSubmessagestringfield();
+	}
+
+	Serialize(): ArrayBuffer {
+		return this.underlying.serializeBinary();
+	}
+
+	ToObject(): helloworld.RepeatedMessage {
+		return this.underlying;
+	}
 }
 
 export class TestMessage implements MessageType {
 	static OneoffieldCase = helloworld.TestMessage.OneoffieldCase;
 
 	private underlying: helloworld.TestMessage;
-	private submessage: helloworld.SubMessageField;
 
 	constructor() {
 		this.underlying = new helloworld.TestMessage();
@@ -256,6 +302,38 @@ export class TestMessage implements MessageType {
 	get OneofStringField(): string {
 		let email = this.underlying.getOneofstringfield();
 		return (email === undefined ? undefined : email);
+	}
+
+	SetSubMessageField(sm: SubMessage): TestMessage {
+		if ((this.underlying.getSubmessagefield() === undefined) && (sm === undefined || sm === null)) {
+			return this;
+		} else if (this.underlying.getSubmessagefield() === sm.ToObject()) {
+			return this;
+		} else {
+			let instance = TestMessage.fromTestMessage(this.underlying.cloneMessage());
+			instance.underlying.setSubmessagefield(sm.ToObject());
+			return instance;
+		}
+	}
+
+	get SubMessageField(): SubMessage {
+		return SubMessage.fromSubMessage(this.underlying.getSubmessagefield());
+	}
+
+	SetRepeatedMessageField(lr: Array<RepeatedMessage>): TestMessage {
+		if ((this.underlying.getRepeatedmessagefieldList() === undefined) && (lr === undefined || lr === null)) {
+			return this;
+		} else if (this.underlying.getRepeatedmessagefieldList() === lr.map((r) => r.ToObject())) {
+			return this;
+		} else {
+			let instance = TestMessage.fromTestMessage(this.underlying.cloneMessage());
+			instance.underlying.setRepeatedmessagefieldList(lr.map((r) => r.ToObject()));
+			return instance;
+		}
+	}
+
+	get RepeatedMessageField(): Array<RepeatedMessage> {
+		return this.underlying.getRepeatedmessagefieldList().map((rm) => RepeatedMessage.fromRepeatedMessage(rm));
 	}
 
 	Serialize(): ArrayBuffer {
