@@ -17,13 +17,16 @@ export namespace helloworld {
 		serializeBinary(): ArrayBuffer;
 		cloneMessage(): HelloReply;
 	}
-	export class SubMessage {
-		static deserializeBinary(arr: Uint8Array): SubMessage;
+	export interface SubMessageFieldConstructor {
+		new(): SubMessageField;
+		deserializeBinary(arr: Uint8Array): SubMessageField;
+	}
+	export interface SubMessageField {
 		setSubmessagestringfield(s: string): void;
 		getSubmessagestringfield(): string;
 		setSubmessageuint64field(n: number): void;
 		serializeBinary(): ArrayBuffer;
-		cloneMessage(): SubMessage;
+		cloneMessage(): SubMessageField;
 		getSubmessageuint64field(): number;
 	}
 	export class RepeatedMessage {
@@ -38,7 +41,7 @@ export namespace helloworld {
 	export class TestMessage {
 		static OneoffieldCase: typeof OneoffieldEnum;
 		static deserializeBinary(arr: Uint8Array): TestMessage;
-		static subMessageField: new() => SubMessage;
+		static subMessageField: SubMessageFieldConstructor;
 		setStringfield(s: string): void;
 		getStringfield(): string;
 		setUint64field(s: number): void;

@@ -104,11 +104,50 @@ export class HelloReply implements MessageType {
 
 export type OneoffieldEnum = helloworld.OneoffieldEnum;
 
+export class SubMessage implements MessageType {
+
+	private underlying;
+
+	constructor() {
+		this.underlying = new helloworld.TestMessage.subMessageField();
+	}
+
+	static fromSubMessage(underlying: helloworld.SubMessageField): SubMessage {
+		let instance = new SubMessage();
+		instance.underlying = underlying;
+		return instance;
+	}
+
+	static Deserialize(buffer: Uint8Array): SubMessage {
+		return SubMessage.fromSubMessage(helloworld.TestMessage.subMessageField.deserializeBinary(buffer));
+	}
+
+	SetSubMessageStringField(s: string): SubMessage {
+		if ((this.underlying.getSubmessagestringfield() === "") && (name === undefined || name === null)) {
+			return this;
+		} else if (this.underlying.getSubmessagestringfield() === name) {
+			return this;
+		} else {
+			let instance = SubMessage.fromSubMessage(this.underlying.cloneMessage());
+			instance.underlying.setSubmessagestringfield(name);
+			return instance;
+		}
+	}
+
+	get SubMessageStringField(): string {
+		return this.underlying.getSubmessagestringfield();
+	}
+
+	Serialize(): ArrayBuffer {
+		return this.underlying.serializeBinary();
+	}
+}
+
 export class TestMessage implements MessageType {
 	static OneoffieldCase = helloworld.TestMessage.OneoffieldCase;
 
 	private underlying: helloworld.TestMessage;
-	private submessage: helloworld.SubMessage;
+	private submessage: helloworld.SubMessageField;
 
 	constructor() {
 		this.underlying = new helloworld.TestMessage();
