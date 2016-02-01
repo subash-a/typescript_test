@@ -8,9 +8,9 @@
 
 goog.provide('proto.helloworld.HelloReply');
 goog.provide('proto.helloworld.HelloRequest');
+goog.provide('proto.helloworld.RepeatedMessage');
+goog.provide('proto.helloworld.SubMessage');
 goog.provide('proto.helloworld.TestMessage');
-goog.provide('proto.helloworld.TestMessage.subMessageField');
-goog.provide('proto.helloworld.repeatedMessage');
 
 goog.require('jspb.Message');
 goog.require('jspb.BinaryReader');
@@ -372,12 +372,12 @@ proto.helloworld.HelloReply.prototype.setMessage = function(value) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.helloworld.repeatedMessage = function(opt_data) {
+proto.helloworld.RepeatedMessage = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.helloworld.repeatedMessage, jspb.Message);
+goog.inherits(proto.helloworld.RepeatedMessage, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.helloworld.repeatedMessage.displayName = 'proto.helloworld.repeatedMessage';
+  proto.helloworld.RepeatedMessage.displayName = 'proto.helloworld.RepeatedMessage';
 }
 
 
@@ -392,8 +392,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.helloworld.repeatedMessage.prototype.toObject = function(opt_includeInstance) {
-  return proto.helloworld.repeatedMessage.toObject(opt_includeInstance, this);
+proto.helloworld.RepeatedMessage.prototype.toObject = function(opt_includeInstance) {
+  return proto.helloworld.RepeatedMessage.toObject(opt_includeInstance, this);
 };
 
 
@@ -402,10 +402,10 @@ proto.helloworld.repeatedMessage.prototype.toObject = function(opt_includeInstan
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.helloworld.repeatedMessage} msg The msg instance to transform.
+ * @param {!proto.helloworld.RepeatedMessage} msg The msg instance to transform.
  * @return {!Object}
  */
-proto.helloworld.repeatedMessage.toObject = function(includeInstance, msg) {
+proto.helloworld.RepeatedMessage.toObject = function(includeInstance, msg) {
   var f, obj = {
     repeatedmessagestringfield: msg.getRepeatedmessagestringfield(),
     repeatedmessageuint64field: msg.getRepeatedmessageuint64field()
@@ -422,23 +422,23 @@ proto.helloworld.repeatedMessage.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.helloworld.repeatedMessage}
+ * @return {!proto.helloworld.RepeatedMessage}
  */
-proto.helloworld.repeatedMessage.deserializeBinary = function(bytes) {
+proto.helloworld.RepeatedMessage.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.helloworld.repeatedMessage;
-  return proto.helloworld.repeatedMessage.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.helloworld.RepeatedMessage;
+  return proto.helloworld.RepeatedMessage.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.helloworld.repeatedMessage} msg The message object to deserialize into.
+ * @param {!proto.helloworld.RepeatedMessage} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.helloworld.repeatedMessage}
+ * @return {!proto.helloworld.RepeatedMessage}
  */
-proto.helloworld.repeatedMessage.deserializeBinaryFromReader = function(msg, reader) {
+proto.helloworld.RepeatedMessage.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -465,10 +465,10 @@ proto.helloworld.repeatedMessage.deserializeBinaryFromReader = function(msg, rea
 /**
  * Class method variant: serializes the given message to binary data
  * (in protobuf wire format), writing to the given BinaryWriter.
- * @param {!proto.helloworld.repeatedMessage} message
+ * @param {!proto.helloworld.RepeatedMessage} message
  * @param {!jspb.BinaryWriter} writer
  */
-proto.helloworld.repeatedMessage.serializeBinaryToWriter = function(message, writer) {
+proto.helloworld.RepeatedMessage.serializeBinaryToWriter = function(message, writer) {
   message.serializeBinaryToWriter(writer);
 };
 
@@ -477,7 +477,7 @@ proto.helloworld.repeatedMessage.serializeBinaryToWriter = function(message, wri
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.helloworld.repeatedMessage.prototype.serializeBinary = function() {
+proto.helloworld.RepeatedMessage.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
   this.serializeBinaryToWriter(writer);
   return writer.getResultBuffer();
@@ -489,7 +489,7 @@ proto.helloworld.repeatedMessage.prototype.serializeBinary = function() {
  * writing to the given BinaryWriter.
  * @param {!jspb.BinaryWriter} writer
  */
-proto.helloworld.repeatedMessage.prototype.serializeBinaryToWriter = function (writer) {
+proto.helloworld.RepeatedMessage.prototype.serializeBinaryToWriter = function (writer) {
   var f = undefined;
   f = this.getRepeatedmessagestringfield();
   if (f.length > 0) {
@@ -510,10 +510,10 @@ proto.helloworld.repeatedMessage.prototype.serializeBinaryToWriter = function (w
 
 /**
  * Creates a deep clone of this proto. No data is shared with the original.
- * @return {!proto.helloworld.repeatedMessage} The clone.
+ * @return {!proto.helloworld.RepeatedMessage} The clone.
  */
-proto.helloworld.repeatedMessage.prototype.cloneMessage = function() {
-  return /** @type {!proto.helloworld.repeatedMessage} */ (jspb.Message.cloneMessage(this));
+proto.helloworld.RepeatedMessage.prototype.cloneMessage = function() {
+  return /** @type {!proto.helloworld.RepeatedMessage} */ (jspb.Message.cloneMessage(this));
 };
 
 
@@ -521,13 +521,13 @@ proto.helloworld.repeatedMessage.prototype.cloneMessage = function() {
  * optional string repeatedMessageStringField = 1;
  * @return {string}
  */
-proto.helloworld.repeatedMessage.prototype.getRepeatedmessagestringfield = function() {
+proto.helloworld.RepeatedMessage.prototype.getRepeatedmessagestringfield = function() {
   return /** @type {string} */ (jspb.Message.getFieldProto3(this, 1, ""));
 };
 
 
 /** @param {string} value  */
-proto.helloworld.repeatedMessage.prototype.setRepeatedmessagestringfield = function(value) {
+proto.helloworld.RepeatedMessage.prototype.setRepeatedmessagestringfield = function(value) {
   jspb.Message.setField(this, 1, value);
 };
 
@@ -536,13 +536,199 @@ proto.helloworld.repeatedMessage.prototype.setRepeatedmessagestringfield = funct
  * optional uint64 repeatedMessageUint64Field = 2;
  * @return {number}
  */
-proto.helloworld.repeatedMessage.prototype.getRepeatedmessageuint64field = function() {
+proto.helloworld.RepeatedMessage.prototype.getRepeatedmessageuint64field = function() {
   return /** @type {number} */ (jspb.Message.getFieldProto3(this, 2, 0));
 };
 
 
 /** @param {number} value  */
-proto.helloworld.repeatedMessage.prototype.setRepeatedmessageuint64field = function(value) {
+proto.helloworld.RepeatedMessage.prototype.setRepeatedmessageuint64field = function(value) {
+  jspb.Message.setField(this, 2, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.helloworld.SubMessage = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.helloworld.SubMessage, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.helloworld.SubMessage.displayName = 'proto.helloworld.SubMessage';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.helloworld.SubMessage.prototype.toObject = function(opt_includeInstance) {
+  return proto.helloworld.SubMessage.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.helloworld.SubMessage} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.helloworld.SubMessage.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    submessagestringfield: msg.getSubmessagestringfield(),
+    submessageuint64field: msg.getSubmessageuint64field()
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.helloworld.SubMessage}
+ */
+proto.helloworld.SubMessage.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.helloworld.SubMessage;
+  return proto.helloworld.SubMessage.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.helloworld.SubMessage} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.helloworld.SubMessage}
+ */
+proto.helloworld.SubMessage.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSubmessagestringfield(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setSubmessageuint64field(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.helloworld.SubMessage} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.helloworld.SubMessage.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.helloworld.SubMessage.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.helloworld.SubMessage.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+  f = this.getSubmessagestringfield();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = this.getSubmessageuint64field();
+  if (f !== 0) {
+    writer.writeUint64(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * Creates a deep clone of this proto. No data is shared with the original.
+ * @return {!proto.helloworld.SubMessage} The clone.
+ */
+proto.helloworld.SubMessage.prototype.cloneMessage = function() {
+  return /** @type {!proto.helloworld.SubMessage} */ (jspb.Message.cloneMessage(this));
+};
+
+
+/**
+ * optional string subMessageStringField = 1;
+ * @return {string}
+ */
+proto.helloworld.SubMessage.prototype.getSubmessagestringfield = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 1, ""));
+};
+
+
+/** @param {string} value  */
+proto.helloworld.SubMessage.prototype.setSubmessagestringfield = function(value) {
+  jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * optional uint64 subMessageUint64Field = 2;
+ * @return {number}
+ */
+proto.helloworld.SubMessage.prototype.getSubmessageuint64field = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 2, 0));
+};
+
+
+/** @param {number} value  */
+proto.helloworld.SubMessage.prototype.setSubmessageuint64field = function(value) {
   jspb.Message.setField(this, 2, value);
 };
 
@@ -570,7 +756,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.helloworld.TestMessage.repeatedFields_ = [7];
+proto.helloworld.TestMessage.repeatedFields_ = [6];
 
 /**
  * Oneof group definitions for this message. Each group defines the field
@@ -630,8 +816,9 @@ proto.helloworld.TestMessage.toObject = function(includeInstance, msg) {
     uint64field: msg.getUint64field(),
     oneofstringfield: jspb.Message.getField(msg, 2),
     oneofuint64field: jspb.Message.getField(msg, 3),
+    submessagefield: (f = msg.getSubmessagefield()) && proto.helloworld.SubMessage.toObject(includeInstance, f),
     repeatedmessagefieldList: jspb.Message.toObjectList(msg.getRepeatedmessagefieldList(),
-    proto.helloworld.repeatedMessage.toObject, includeInstance)
+    proto.helloworld.RepeatedMessage.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -684,9 +871,14 @@ proto.helloworld.TestMessage.deserializeBinaryFromReader = function(msg, reader)
       var value = /** @type {number} */ (reader.readUint64());
       msg.setOneofuint64field(value);
       break;
-    case 7:
-      var value = new proto.helloworld.repeatedMessage;
-      reader.readMessage(value,proto.helloworld.repeatedMessage.deserializeBinaryFromReader);
+    case 5:
+      var value = new proto.helloworld.SubMessage;
+      reader.readMessage(value,proto.helloworld.SubMessage.deserializeBinaryFromReader);
+      msg.setSubmessagefield(value);
+      break;
+    case 6:
+      var value = new proto.helloworld.RepeatedMessage;
+      reader.readMessage(value,proto.helloworld.RepeatedMessage.deserializeBinaryFromReader);
       msg.getRepeatedmessagefieldList().push(value);
       break;
     default:
@@ -755,12 +947,20 @@ proto.helloworld.TestMessage.prototype.serializeBinaryToWriter = function (write
       f
     );
   }
+  f = this.getSubmessagefield();
+  if (f != null) {
+    writer.writeMessage(
+      5,
+      f,
+      proto.helloworld.SubMessage.serializeBinaryToWriter
+    );
+  }
   f = this.getRepeatedmessagefieldList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      7,
+      6,
       f,
-      proto.helloworld.repeatedMessage.serializeBinaryToWriter
+      proto.helloworld.RepeatedMessage.serializeBinaryToWriter
     );
   }
 };
@@ -846,20 +1046,41 @@ proto.helloworld.TestMessage.prototype.clearOneofuint64field = function() {
 
 
 /**
- * repeated repeatedMessage repeatedMessageField = 7;
- * If you change this array by adding, removing or replacing elements, or if you
- * replace the array itself, then you must call the setter to update it.
- * @return {!Array.<!proto.helloworld.repeatedMessage>}
+ * optional SubMessage subMessageField = 5;
+ * @return {proto.helloworld.SubMessage}
  */
-proto.helloworld.TestMessage.prototype.getRepeatedmessagefieldList = function() {
-  return /** @type{!Array.<!proto.helloworld.repeatedMessage>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.helloworld.repeatedMessage, 7));
+proto.helloworld.TestMessage.prototype.getSubmessagefield = function() {
+  return /** @type{proto.helloworld.SubMessage} */ (
+    jspb.Message.getWrapperField(this, proto.helloworld.SubMessage, 5));
 };
 
 
-/** @param {Array.<!proto.helloworld.repeatedMessage>|undefined} value  */
+/** @param {proto.helloworld.SubMessage|undefined} value  */
+proto.helloworld.TestMessage.prototype.setSubmessagefield = function(value) {
+  jspb.Message.setWrapperField(this, 5, value);
+};
+
+
+proto.helloworld.TestMessage.prototype.clearSubmessagefield = function() {
+  this.setSubmessagefield(undefined);
+};
+
+
+/**
+ * repeated RepeatedMessage repeatedMessageField = 6;
+ * If you change this array by adding, removing or replacing elements, or if you
+ * replace the array itself, then you must call the setter to update it.
+ * @return {!Array.<!proto.helloworld.RepeatedMessage>}
+ */
+proto.helloworld.TestMessage.prototype.getRepeatedmessagefieldList = function() {
+  return /** @type{!Array.<!proto.helloworld.RepeatedMessage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.helloworld.RepeatedMessage, 6));
+};
+
+
+/** @param {Array.<!proto.helloworld.RepeatedMessage>|undefined} value  */
 proto.helloworld.TestMessage.prototype.setRepeatedmessagefieldList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 7, value);
+  jspb.Message.setRepeatedWrapperField(this, 6, value);
 };
 
 
@@ -868,187 +1089,3 @@ proto.helloworld.TestMessage.prototype.clearRepeatedmessagefieldList = function(
 };
 
 
-
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.helloworld.TestMessage.subMessageField = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
-};
-goog.inherits(proto.helloworld.TestMessage.subMessageField, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  proto.helloworld.TestMessage.subMessageField.displayName = 'proto.helloworld.TestMessage.subMessageField';
-}
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto suitable for use in Soy templates.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.helloworld.TestMessage.subMessageField.prototype.toObject = function(opt_includeInstance) {
-  return proto.helloworld.TestMessage.subMessageField.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.helloworld.TestMessage.subMessageField} msg The msg instance to transform.
- * @return {!Object}
- */
-proto.helloworld.TestMessage.subMessageField.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    submessagestringfield: msg.getSubmessagestringfield(),
-    submessageuint64field: msg.getSubmessageuint64field()
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.helloworld.TestMessage.subMessageField}
- */
-proto.helloworld.TestMessage.subMessageField.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.helloworld.TestMessage.subMessageField;
-  return proto.helloworld.TestMessage.subMessageField.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.helloworld.TestMessage.subMessageField} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.helloworld.TestMessage.subMessageField}
- */
-proto.helloworld.TestMessage.subMessageField.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setSubmessagestringfield(value);
-      break;
-    case 2:
-      var value = /** @type {number} */ (reader.readUint64());
-      msg.setSubmessageuint64field(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Class method variant: serializes the given message to binary data
- * (in protobuf wire format), writing to the given BinaryWriter.
- * @param {!proto.helloworld.TestMessage.subMessageField} message
- * @param {!jspb.BinaryWriter} writer
- */
-proto.helloworld.TestMessage.subMessageField.serializeBinaryToWriter = function(message, writer) {
-  message.serializeBinaryToWriter(writer);
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.helloworld.TestMessage.subMessageField.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  this.serializeBinaryToWriter(writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format),
- * writing to the given BinaryWriter.
- * @param {!jspb.BinaryWriter} writer
- */
-proto.helloworld.TestMessage.subMessageField.prototype.serializeBinaryToWriter = function (writer) {
-  var f = undefined;
-  f = this.getSubmessagestringfield();
-  if (f.length > 0) {
-    writer.writeString(
-      1,
-      f
-    );
-  }
-  f = this.getSubmessageuint64field();
-  if (f !== 0) {
-    writer.writeUint64(
-      2,
-      f
-    );
-  }
-};
-
-
-/**
- * Creates a deep clone of this proto. No data is shared with the original.
- * @return {!proto.helloworld.TestMessage.subMessageField} The clone.
- */
-proto.helloworld.TestMessage.subMessageField.prototype.cloneMessage = function() {
-  return /** @type {!proto.helloworld.TestMessage.subMessageField} */ (jspb.Message.cloneMessage(this));
-};
-
-
-/**
- * optional string subMessageStringField = 1;
- * @return {string}
- */
-proto.helloworld.TestMessage.subMessageField.prototype.getSubmessagestringfield = function() {
-  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 1, ""));
-};
-
-
-/** @param {string} value  */
-proto.helloworld.TestMessage.subMessageField.prototype.setSubmessagestringfield = function(value) {
-  jspb.Message.setField(this, 1, value);
-};
-
-
-/**
- * optional uint64 subMessageUint64Field = 2;
- * @return {number}
- */
-proto.helloworld.TestMessage.subMessageField.prototype.getSubmessageuint64field = function() {
-  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 2, 0));
-};
-
-
-/** @param {number} value  */
-proto.helloworld.TestMessage.subMessageField.prototype.setSubmessageuint64field = function(value) {
-  jspb.Message.setField(this, 2, value);
-};
