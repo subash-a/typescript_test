@@ -766,7 +766,7 @@ proto.helloworld.TestMessage.repeatedFields_ = [6];
  * @private {!Array<!Array<number>>}
  * @const
  */
-proto.helloworld.TestMessage.oneofGroups_ = [[2,3]];
+proto.helloworld.TestMessage.oneofGroups_ = [[2,3,7]];
 
 /**
  * @enum {number}
@@ -774,7 +774,8 @@ proto.helloworld.TestMessage.oneofGroups_ = [[2,3]];
 proto.helloworld.TestMessage.OneoffieldCase = {
   ONEOFFIELD_NOT_SET: 0,
   ONEOFSTRINGFIELD: 2,
-  ONEOFUINT64FIELD: 3
+  ONEOFUINT64FIELD: 3,
+  ONEOFSUBMESSAGEFIELD: 7
 };
 
 /**
@@ -816,6 +817,7 @@ proto.helloworld.TestMessage.toObject = function(includeInstance, msg) {
     uint64field: msg.getUint64field(),
     oneofstringfield: jspb.Message.getField(msg, 2),
     oneofuint64field: jspb.Message.getField(msg, 3),
+    oneofsubmessagefield: (f = msg.getOneofsubmessagefield()) && proto.helloworld.SubMessage.toObject(includeInstance, f),
     submessagefield: (f = msg.getSubmessagefield()) && proto.helloworld.SubMessage.toObject(includeInstance, f),
     repeatedmessagefieldList: jspb.Message.toObjectList(msg.getRepeatedmessagefieldList(),
     proto.helloworld.RepeatedMessage.toObject, includeInstance)
@@ -870,6 +872,11 @@ proto.helloworld.TestMessage.deserializeBinaryFromReader = function(msg, reader)
     case 3:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setOneofuint64field(value);
+      break;
+    case 7:
+      var value = new proto.helloworld.SubMessage;
+      reader.readMessage(value,proto.helloworld.SubMessage.deserializeBinaryFromReader);
+      msg.setOneofsubmessagefield(value);
       break;
     case 5:
       var value = new proto.helloworld.SubMessage;
@@ -945,6 +952,14 @@ proto.helloworld.TestMessage.prototype.serializeBinaryToWriter = function (write
     writer.writeUint64(
       3,
       f
+    );
+  }
+  f = this.getOneofsubmessagefield();
+  if (f != null) {
+    writer.writeMessage(
+      7,
+      f,
+      proto.helloworld.SubMessage.serializeBinaryToWriter
     );
   }
   f = this.getSubmessagefield();
@@ -1042,6 +1057,27 @@ proto.helloworld.TestMessage.prototype.setOneofuint64field = function(value) {
 
 proto.helloworld.TestMessage.prototype.clearOneofuint64field = function() {
   jspb.Message.setOneofField(this, 3, proto.helloworld.TestMessage.oneofGroups_[0], undefined);
+};
+
+
+/**
+ * optional SubMessage oneofSubMessageField = 7;
+ * @return {proto.helloworld.SubMessage}
+ */
+proto.helloworld.TestMessage.prototype.getOneofsubmessagefield = function() {
+  return /** @type{proto.helloworld.SubMessage} */ (
+    jspb.Message.getWrapperField(this, proto.helloworld.SubMessage, 7));
+};
+
+
+/** @param {proto.helloworld.SubMessage|undefined} value  */
+proto.helloworld.TestMessage.prototype.setOneofsubmessagefield = function(value) {
+  jspb.Message.setOneofWrapperField(this, 7, proto.helloworld.TestMessage.oneofGroups_[0], value);
+};
+
+
+proto.helloworld.TestMessage.prototype.clearOneofsubmessagefield = function() {
+  this.setOneofsubmessagefield(undefined);
 };
 
 

@@ -106,7 +106,7 @@ export type OneoffieldEnum = helloworld.OneoffieldEnum;
 
 export class SubMessage implements MessageType {
 
-	private underlying;
+	private underlying: helloworld.SubMessage;
 
 	constructor() {
 		this.underlying = new helloworld.SubMessage();
@@ -149,7 +149,7 @@ export class SubMessage implements MessageType {
 
 export class RepeatedMessage implements MessageType {
 
-	private underlying;
+	private underlying: helloworld.RepeatedMessage;
 
 	constructor() {
 		this.underlying = new helloworld.RepeatedMessage();
@@ -166,19 +166,19 @@ export class RepeatedMessage implements MessageType {
 	}
 
 	SetRepeatedMessageStringField(s: string): RepeatedMessage {
-		if ((this.underlying.getSubmessagestringfield() === "") && (name === undefined || name === null)) {
+		if ((this.underlying.getRepeatedmessagestringfield() === "") && (name === undefined || name === null)) {
 			return this;
-		} else if (this.underlying.getSubmessagestringfield() === name) {
+		} else if (this.underlying.getRepeatedmessagestringfield() === name) {
 			return this;
 		} else {
 			let instance = RepeatedMessage.fromRepeatedMessage(this.underlying.cloneMessage());
-			instance.underlying.setSubmessagestringfield(name);
+			instance.underlying.setRepeatedmessagestringfield(name);
 			return instance;
 		}
 	}
 
 	get RepeatedMessageStringField(): string {
-		return this.underlying.getSubmessagestringfield();
+		return this.underlying.getRepeatedmessagestringfield();
 	}
 
 	Serialize(): ArrayBuffer {
@@ -321,7 +321,7 @@ export class TestMessage implements MessageType {
 	}
 
 	SetRepeatedMessageField(lr: Array<RepeatedMessage>): TestMessage {
-		if ((this.underlying.getRepeatedmessagefieldList() === undefined) && (lr === undefined || lr === null)) {
+		if ((this.underlying.getRepeatedmessagefieldList() === []) && (lr === undefined || lr === null)) {
 			return this;
 		} else if (this.underlying.getRepeatedmessagefieldList() === lr.map((r) => r.ToObject())) {
 			return this;

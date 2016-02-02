@@ -65,6 +65,7 @@ message TestMessage {
 	oneof oneofField {
 		string oneofStringField = 2;
 		uint64 oneofUint64Field = 3;
+		SubMessage oneofSubMessageField = 7;
 	}
 	SubMessage subMessageField = 5;
 	repeated RepeatedMessage repeatedMessageField = 6;
