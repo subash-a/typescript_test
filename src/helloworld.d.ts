@@ -54,8 +54,41 @@ export namespace helloworld {
 		getOneoffieldCase(): number;
 		getRepeatedmessagefieldList(): Array<helloworld.RepeatedMessage>;
 		setRepeatedmessagefieldList(a: Array<helloworld.RepeatedMessage>): void;
+		getMapstringstringfieldList(): Array<TestMessage.MapStringStringFieldEntry>;
+		setMapstringstringfieldList(v: Array<TestMessage.MapStringStringFieldEntry>): void;
+		clearMapstringstringfieldList(): void;
 		serializeBinary(): ArrayBuffer;
 		cloneMessage(): TestMessage;
+	}
+
+	export namespace TestMessage {
+		export class MapStringStringFieldEntry {
+			static deserializeBinary(arr: Uint8Array): TestMessage.MapStringStringFieldEntry;
+			serializeBinary(): ArrayBuffer;
+			getKey(): string;
+			setKey(k: string): void;
+			getValue(): string;
+			setValue(v: string): void;
+			cloneMessage(): TestMessage.MapStringStringFieldEntry;
+		}
+	}
+
+	export class TestMessage2 {
+		static deserializeBinary(arr: Uint8Array): TestMessage;
+		getMapstringstringfieldList(): Array<TestMessage2.MapStringStringFieldEntry>;
+		setMapstringstringfieldList(v: Array<TestMessage2.MapStringStringFieldEntry>): void;
+		serializeBinary(): ArrayBuffer;
+	}
+
+	export namespace TestMessage2 {
+		export class MapStringStringFieldEntry {
+			static deserializeBinary(arr: Uint8Array): TestMessage2.MapStringStringFieldEntry;
+			serializeBinary(): ArrayBuffer;
+			getKey(): string;
+			setKey(k: string): void;
+			getValue(): string;
+			setValue(v: string): void;
+		}
 	}
 
 	export enum OneoffieldEnum {
