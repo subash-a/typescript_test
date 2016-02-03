@@ -70,3 +70,7 @@ message TestMessage {
 	SubMessage subMessageField = 5;
 	repeated RepeatedMessage repeatedMessageField = 6;
 }
+
+message TestMessage2 {
+    map<string, string> mapStringStringField = 1;
+}

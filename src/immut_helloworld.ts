@@ -1,5 +1,6 @@
 import {Uint64} from "./custom_types";
 import {helloworld} from "./helloworld";
+import * as Immutable from "immutable";
 
 export const PROTOBUF_DEFAULT_NORMAL_STRING: string = "";
 export const PROTOBUF_DEFAULT_NORMAL_UINT64: Uint64 = Uint64(0);
@@ -342,5 +343,85 @@ export class TestMessage implements MessageType {
 
 	GetOneofFieldCase(): OneoffieldEnum {
 		return this.underlying.getOneoffieldCase();
+	}
+}
+
+export class TestMessage2 {
+	private static usingSafeConstruct: boolean;
+	private store: Immutable.Map<string, Object>;
+	private mutationFlag: boolean = false;
+	private oldVersion: boolean = false;
+
+	constructor() {
+		if (!TestMessage2.usingSafeConstruct) {
+			throw new Error("Do not use constructor directly for TestMessage2");
+		}
+	}
+
+	static NewTestMessage2(): TestMessage2 {
+		return TestMessage2.newTestMessage2(TestMessage2.TestMessage2ToImmutableMap(new helloworld.TestMessage2));
+	}
+
+	static Deserialize(u: helloworld.TestMessage2): TestMessage2 {
+		// TODO should we clone our arg?
+		return TestMessage2.newTestMessage2(TestMessage2.TestMessage2ToImmutableMap(u));
+	}
+
+	private static TestMessage2ToImmutableMap(u: helloworld.TestMessage2): Immutable.Map<string, Object> {
+		let res = Immutable.Map<string, Object>();
+
+		res = res.set("MapStringStringField", u.getMapstringstringfieldList());
+
+		return res;
+	}
+
+	private static newTestMessage2(u: Immutable.Map<string, Object>, mutationFlag: boolean = false): TestMessage2 {
+		TestMessage2.usingSafeConstruct = true;
+		let res = new TestMessage2();
+		TestMessage2.usingSafeConstruct = false;
+		res.store = u;
+		return res;
+	}
+
+	Serialize(): helloworld.TestMessage2 {
+		let res = new helloworld.TestMessage2();
+
+		res.setMapstringstringfieldList(this.MapStringStringField);
+
+		return res;
+	}
+
+	get MapStringStringField(): Array<helloworld.TestMessage2.MapStringStringFieldEntry> {
+		return <Array<helloworld.TestMessage2.MapStringStringFieldEntry>>this.store.get("MapStringStringField");
+	}
+
+	SetMapStringStringField(v: Array<helloworld.TestMessage2.MapStringStringFieldEntry>): TestMessage2 {
+		if (v === /* tslint:disable:no-null-keyword */null/* tslint:enable:no-null-keyword */) {
+			v = undefined;
+		}
+		if (v === undefined) {
+			v = [];
+		}
+
+		if (v === this.MapStringStringField) {		// Should it check deep equality?
+			return this;
+		}
+
+		return this.newTestMessage2(this.store.set("MapStringStringField", v));
+	}
+
+	private newTestMessage2(store: Immutable.Map<string, Object>, mutationFlag: boolean = this.mutationFlag, oldVersion: boolean = this.oldVersion): TestMessage2 {
+		if (this.store === store && this.mutationFlag === mutationFlag && this.oldVersion === oldVersion) {
+			return this;
+		}
+		TestMessage2.usingSafeConstruct = true;
+		let res = this.mutationFlag ? this : new TestMessage2();
+		TestMessage2.usingSafeConstruct = false;
+		res.store = store;
+		res.mutationFlag = mutationFlag;
+
+		res.oldVersion = oldVersion;
+
+		return res;
 	}
 }

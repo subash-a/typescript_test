@@ -1,6 +1,6 @@
 import {Uint64} from "./custom_types";
 import {helloworld} from "./helloworld";
-import {TestMessage, PROTOBUF_DEFAULT_NORMAL_STRING, PROTOBUF_DEFAULT_NORMAL_UINT64, PROTOBUF_DEFAULT_ONEOF_STRING, PROTOBUF_DEFAULT_ONEOF_UINT64, MessageType} from "./immut_helloworld";
+import {TestMessage, TestMessage2, PROTOBUF_DEFAULT_NORMAL_STRING, PROTOBUF_DEFAULT_NORMAL_UINT64, PROTOBUF_DEFAULT_ONEOF_STRING, PROTOBUF_DEFAULT_ONEOF_UINT64, MessageType} from "./immut_helloworld";
 
 function verifyWithSerialization<T extends MessageType>(src: T, dest: string): boolean {
 	let buf = src.Serialize();
@@ -325,6 +325,78 @@ describe("TestMessage", () => {
 					expect(TestMessage.Deserialize(testMessageWithOneofString).OneofStringField).toEqual(stringValue);
 					expect(TestMessage.Deserialize(testMessageWithOneofUint64).OneofUint64Field).toEqual(uint64Value);
 				});
+			});
+		});
+	});
+});
+
+describe("TestMessage2", () => {
+	describe("New TestMessage2", () => {
+		it("should throw error when instance is attempted to create using new", () => {
+			expect(() => new TestMessage2()).toThrow();
+		});
+
+		it("should not throw error when a new instance is created using NewTestMessage2", () => {
+			expect(() => TestMessage2.NewTestMessage2()).not.toThrow();
+		});
+	});
+
+	describe("with a new TestMessage2 instance", () => {
+		let testMessage: TestMessage2;
+
+		beforeEach(() => {
+			testMessage = TestMessage2.NewTestMessage2();
+		});
+
+		describe("MapStringStringField", () => {
+			let v: Array<helloworld.TestMessage2.MapStringStringFieldEntry>;
+
+			beforeEach(() => {
+				let v1 = new helloworld.TestMessage2.MapStringStringFieldEntry();
+				v1.setKey("k1");
+				v1.setValue("v1");
+				v = [v1];
+			});
+
+			it("should have appropriate starting values set", () => {
+				expect(testMessage.MapStringStringField).toEqual([]);
+			});
+
+			it("should not mutate the original instance when new value is set", () => {
+				let modifiedTestMessage = testMessage.SetMapStringStringField(v);
+				expect(modifiedTestMessage).not.toBe(testMessage);
+				expect(testMessage.MapStringStringField).toEqual([]);
+			});
+
+			it("should set the MapStringStringField value and return a new instance when a valid entry is passed", () => {
+				let modifiedTestMessage = testMessage.SetMapStringStringField(v);
+				expect(modifiedTestMessage.MapStringStringField).toBe(v);
+			});
+
+			it("should return the same instance when value is not modified", () => {
+				let modifiedTestMessage = testMessage.SetMapStringStringField(v);
+				let modifiedAgainTestMessage = modifiedTestMessage.SetMapStringStringField(v);
+				expect(modifiedAgainTestMessage).toBe(modifiedTestMessage);
+				expect(modifiedAgainTestMessage.MapStringStringField).toEqual(v);
+				expect(modifiedTestMessage.MapStringStringField).toEqual(v);
+			});
+
+			it("should set the MapStringStringField value to default value when undefined is passed", () => {
+				let modifiedTestMessage = testMessage.SetMapStringStringField(undefined);
+				expect(modifiedTestMessage.MapStringStringField).toEqual([]);
+
+				modifiedTestMessage = testMessage.SetMapStringStringField(v);
+				let modifiedTestMessage2 = modifiedTestMessage.SetMapStringStringField(undefined);
+				expect(modifiedTestMessage2.MapStringStringField).toEqual([]);
+			});
+
+			it("should set the MapStringStringField value to default value when null is passed", () => {
+				let modifiedTestMessage = testMessage.SetMapStringStringField(null);
+				expect(modifiedTestMessage.MapStringStringField).toEqual([]);
+
+				modifiedTestMessage = testMessage.SetMapStringStringField(v);
+				let modifiedTestMessage2 = modifiedTestMessage.SetMapStringStringField(null);
+				expect(modifiedTestMessage2.MapStringStringField).toEqual([]);
 			});
 		});
 	});
